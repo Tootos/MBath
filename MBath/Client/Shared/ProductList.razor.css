@@ -1,0 +1,40 @@
+﻿
+.list-unstyled {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.media {
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    max-width: 300px;
+}
+
+    .media:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
+
+img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.page-selection {
+    margin-right: 15px;
+    margin-bottom: 30px;
+}
+
+
+@media (max-width: 1023.98px) {
+    .media {
+        justify-content: flex-start;
+    }
+
+}

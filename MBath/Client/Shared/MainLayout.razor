@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    
+    <div class="left-column">
+        <Sidebar/>
+    </div>
+    <main>
+        <div class="top-row px-4">
+            <Search/>
+            <CartBasket/>
+        </div>            
+        <article class="content px-2">
+            
+            @Body
+        </article>
+    </main>
+</div>
+

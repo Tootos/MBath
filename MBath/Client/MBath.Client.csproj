@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.15" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\MBath.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Content\Images\Αποχέτευση\" />
+    <Folder Include="wwwroot\Content\Images\Θερμοσίφωνα\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Διακόπτες - Κάνουλες\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Εξαρτήματα\Εξαρτήματα Πολυαιθυλενίου\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Εξαρτήματα\Εξαρτήματα Πολυπροπυλενίου\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Εξαρτήματα\Εξαρτήματα Πολυστρωματικής\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Εξαρτήματα\Ορειχάλκινα Εξαρτήματα\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Εξαρτήματα\Σιδερένια εξαρτήματα\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Στηρίγματα\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Συλλέκτες\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Σωλήνες\Δικτυωμένου Πολυαιθυλενίου Pex\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Σωλήνες\Πολυπροπυλενίου PP-R\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Σωλήνες\Πολυστρωματικές σωλήνες PexAl\" />
+    <Folder Include="wwwroot\Content\Images\Ύδρευση\Σωλήνες\Χαλκοσωλήνες\" />
+    <Folder Include="wwwroot\Content\Images\Κουζίνα\Αξεσουάρ Κουζίνα ανταλλακτικά\" />
+    <Folder Include="wwwroot\Content\Images\Κουζίνα\Απορροφητήρες\" />
+    <Folder Include="wwwroot\Content\Images\Κουζίνα\Μπαταρίες\" />
+    <Folder Include="wwwroot\Content\Images\Κουζίνα\Νεροχύτες Συνθετικοί\" />
+    <Folder Include="wwwroot\Content\Images\Μπάνιο\" />
+  </ItemGroup>
+
+</Project>

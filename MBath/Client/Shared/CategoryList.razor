@@ -1,0 +1,59 @@
+﻿@inject ICategoryService CategoryService
+@implements IDisposable
+
+@if(CategoryService.Categories==null || CategoryService.Categories.Count == 0)
+{
+    <span>@CategoryService.Message</span>
+}
+else
+{
+    <ul class="list-unstyled" >
+        @foreach(var category in CategoryService.Categories)
+        {
+            @if (category.URL.ToLower().Contains("products"))
+            {
+                <li class="media my-3" onclick="location.href='@($"/{category.URL}/1")'">
+
+                    <div class="media-img-body mr-2">
+                        <img class="media-img" src="@category.ImgURL" alt="@category.Name" />
+                    </div>
+                    <div class="media-body">
+                        <h4>@category.Name</h4>
+
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="media my-3" onclick="location.href='@($"/{category.URL}")'">
+
+                    <div class="media-img-body mr-2">
+                        <img class="media-img" src="@category.ImgURL" alt="@category.Name" />
+                    </div>
+                    <div class="media-body">
+                        <h4>@category.Name</h4>
+
+                    </div>
+                </li>
+            }
+            
+        }
+
+    </ul>
+}
+
+@code{
+    private List<bool> hasProducts { get; set; }= new List<bool>();
+   
+    
+    protected override void OnInitialized()
+    {
+        CategoryService.CategoriesChanged += StateHasChanged;
+    }    
+
+    public void Dispose()
+    {
+        CategoryService.CategoriesChanged -= StateHasChanged;
+    }
+
+}

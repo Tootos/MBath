@@ -1,0 +1,39 @@
+﻿﻿
+.media {
+    display: flex;
+    align-items: flex-start;
+}
+
+.media-body {
+    flex: 1;
+}
+
+.media-img {
+    max-height: 300px;
+    max-width: 300px;
+    border-radius: 6px;
+    margin: 0px 10px 10px 10px;
+}
+
+.media-img-wrapper {
+    max-width: 300px;
+    max-height: 300px;
+    text-align: center;
+}
+
+h2{
+    font-size:32px;
+}
+
+@media (max-width: 1023px) {
+    .media-img {
+        max-width: 300px;
+    }
+
+    .media-img-wrapper {
+        max-width: 100%;
+        max-height: auto;
+    }
+}
+
+

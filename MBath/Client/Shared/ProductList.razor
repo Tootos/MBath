@@ -1,0 +1,64 @@
+﻿@inject IProductService ProductService
+@implements IDisposable
+
+@if (ProductService.Products == null || ProductService.Products.Count == 0)
+{
+    <span>@ProductService.Message</span>
+}
+else
+{
+
+   
+
+    <ul class="list-unstyled">
+        @foreach (var product in ProductService.Products)
+        {
+            <li class="media my-3" onclick="location.href='@($"product/{product.Id}")'">
+                
+                    
+                    <div class="media-img-wrapper mr-2">
+                    <a href="/product/@product.Id">
+                        <img class="media-img" src="@product.ImgURL" alt="@product.Name" />
+                    </a>
+                    </div>
+                    <div class="media-body">
+                    
+                        <h4 class="mb-0">@product.Name</h4>                                                        
+                         <p>@product.Description</p>                   
+                    </div>
+
+            </li>
+        }
+    </ul>
+    @for (int i = 1; i <= ProductService.Pages; i++)
+    {
+        <!--I don't like this, need to find a better way-->
+        @if (ProductService.IsSearchPage)
+        {
+            <a class="btn
+                @(i==ProductService.CurrentPage ? "btn-info" : "btn-outline-info")
+                page-selection"
+               href=" products/@ProductService.LastSearchedText/@i">@i</a>
+        }else{
+        <a class="btn
+                @(i==ProductService.CurrentPage ? "btn-info" : "btn-outline-info")
+                page-selection"
+           href=" products/search/@ProductService.LastSearchedText/@i">@i</a>
+        }
+    }
+
+}
+
+@code{
+    private bool hasProducts = false;
+
+    protected override void OnInitialized()
+    {
+        ProductService.ProductsChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ProductService.ProductsChanged -= StateHasChanged;
+    }
+}

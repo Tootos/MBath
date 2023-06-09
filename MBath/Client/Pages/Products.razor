@@ -1,0 +1,35 @@
+﻿@page "/products/{categoryUrl}/{page:int}"
+@page "/products/search/{searchedText}/{page:int}"
+@inject IProductService ProductService
+
+
+<ProductList/>
+
+
+@code {
+    [Parameter]
+    public string? CategoryUrl { get; set; } = null;
+
+    [Parameter]
+    public string? SearchedText { get; set; } = null;
+
+    [Parameter]
+    public int Page { get; set; } = 1;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (CategoryUrl != null)
+        {
+            ProductService.IsSearchPage = true;
+            await ProductService.GetProductsAsync(CategoryUrl,Page);
+        }
+        else if (SearchedText != null)
+        {
+            ProductService.IsSearchPage = false;
+            await ProductService.SearchProductsAsync(SearchedText, Page);
+        }
+
+    }
+
+}
+
