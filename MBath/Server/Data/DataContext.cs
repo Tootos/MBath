@@ -1,4 +1,5 @@
 ﻿using MBath.Shared.Models;
+using MBath.Shared.Models.UserModels;
 
 namespace MBath.Server.Data
 {
@@ -11,6 +12,8 @@ namespace MBath.Server.Data
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Variant> Variants { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
       
         protected override void OnModelCreating(ModelBuilder modelBuilder)

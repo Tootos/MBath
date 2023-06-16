@@ -1,10 +1,13 @@
 global using MBath.Client.Services.CategoryServices;
 global using MBath.Client.Services.ProductServices;
 global using MBath.Client.Services.CartServices;
+global using MBath.Client.Services.AuthenticationServices;
+
 global using MBath.Shared.DataTransferObjects;
 global using MBath.Shared.Models;
+global using MBath.Shared.Models.UserModels;
 
-
+global using Microsoft.AspNetCore.Components.Authorization;
 global using Blazored.LocalStorage;
 using MBath.Client;
 using Microsoft.AspNetCore.Components.Web;
@@ -20,6 +23,11 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService,CartService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+builder.Services.AddOptions();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
 
 await builder.Build().RunAsync();

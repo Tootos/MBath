@@ -4,9 +4,13 @@ global using MBath.Server.Data;
 global using MBath.Server.Services.ProductServices;
 global using MBath.Server.Services.CategoryServices;
 global using MBath.Server.Services.CartServices;
+global using MBath.Server.Services.AuthenticationServices;
 global using MBath.Shared.DataTransferObjects;
-using Microsoft.AspNetCore.ResponseCompression;
 
+using Microsoft.IdentityModel.Tokens;
+
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +29,21 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService,CartService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8
+            .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+
+    });
 
 var app = builder.Build();
 
@@ -52,6 +71,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
