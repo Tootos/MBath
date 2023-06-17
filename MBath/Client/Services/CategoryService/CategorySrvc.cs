@@ -3,16 +3,16 @@ using System.Net.Http.Json;
 
 namespace MBath.Client.Services.CategoryServices
 {
-    public class CategoryService : ICategoryService
+    public class CategorySrvc : ICategorySrvc
     {
         private readonly HttpClient _http;
 
         public event Action CategoriesChanged;
 
-        public List<Category> Categories { get; set; }= new List<Category>();
+        public List<Category> Categories { get; set; } = new List<Category>();
         public string Message { get; set; } = "Loading. . .";
 
-        public CategoryService(HttpClient http)
+        public CategorySrvc(HttpClient http)
         {
             _http = http;
         }
@@ -22,20 +22,19 @@ namespace MBath.Client.Services.CategoryServices
             var result = await _http.GetFromJsonAsync<ServiceResponse<List<Category>>>($"api/category");
 
             return result;
-            
-            
+
         }
 
         public async Task GetCategoriesAsync(string categoryUrl)
         {
             var result = await _http.GetFromJsonAsync<ServiceResponse<List<Category>>>($"api/category/{categoryUrl}");
-            if(result != null && result.Data!=null) 
+            if (result != null && result.Data != null)
             {
-                 Categories= result.Data;
+                Categories = result.Data;
             }
             CategoriesChanged.Invoke();
         }
-
+        
         public async Task GetParentCategoriesAsync()
         {
             var result = await _http.GetFromJsonAsync<ServiceResponse<List<Category>>>($"api/category/parents");
@@ -44,6 +43,13 @@ namespace MBath.Client.Services.CategoryServices
                 Categories = result.Data;
             }
             CategoriesChanged.Invoke();
+        }
+
+        public async Task<bool> HasProductsAsync(int categoryId)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<bool>>($"api/category/hasproducts/{categoryId}");
+
+            return result.Success;
         }
     }
 }

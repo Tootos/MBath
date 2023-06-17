@@ -1,6 +1,6 @@
 ﻿namespace MBath.Client.Services.ProductServices
 {
-    public interface IProductService
+    public interface IProductSrvc
     {
         event Action ProductsChanged;
         List<Product> Products { get; set; }

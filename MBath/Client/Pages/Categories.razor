@@ -1,7 +1,7 @@
 ﻿@page "/proionta"
 @page "/{categoryUrl}"
 
-@inject ICategoryService CategoryService
+@inject ICategorySrvc CategoryService
 
 <CategoryList/>
 
@@ -11,22 +11,21 @@
     public string categoryUrl { get; set; }
 
     public bool hasProducts = false;
-
-    protected override void OnInitialized()
-    {
-        
-    }
+   
 
     protected override async Task OnParametersSetAsync()
     {
-        if(categoryUrl!= null)
+        
+        if (categoryUrl==null)
         {
-            await CategoryService.GetCategoriesAsync(categoryUrl);            
+
+            await CategoryService.GetParentCategoriesAsync();
         }
         else
         {
-            await CategoryService.GetParentCategoriesAsync();
-        }     
+            await CategoryService.GetCategoriesAsync(categoryUrl);
+        }                 
+        
     }
 
 }

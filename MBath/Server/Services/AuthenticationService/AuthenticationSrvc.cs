@@ -8,12 +8,12 @@ using System.Security.Cryptography;
 
 namespace MBath.Server.Services.AuthenticationServices
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationSrvc : IAuthenticationSrvc
     {
         private readonly DataContext _context;
         private readonly IConfiguration _confirguration;
 
-        public AuthenticationService(DataContext context, IConfiguration confirguration)
+        public AuthenticationSrvc(DataContext context, IConfiguration confirguration)
         {
             _context = context;
             _confirguration = confirguration;

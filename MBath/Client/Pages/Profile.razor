@@ -1,6 +1,6 @@
 ﻿@page "/profile"
 @attribute [Authorize]
-@inject IAuthenticationService AuthenticationService
+@inject IAuthenticationSrvc AuthenticationService
 <PageTitle>Profile</PageTitle>
 
 <AuthorizeView>
@@ -34,8 +34,6 @@
 
     private async Task ChangePassword()
     {
-
-        Console.WriteLine(request.Password + "\t" + request.ConfirmPassword);
 
         var result = await AuthenticationService.ChangePassword(request);
         message = result.Message;

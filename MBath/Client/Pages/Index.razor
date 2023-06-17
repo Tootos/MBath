@@ -1,5 +1,38 @@
 ﻿@page "/"
 
 <PageTitle>MBath</PageTitle>
-<h1>MBath</h1>
 
+<h1>@message</h1>
+
+<AuthorizeView>
+    <Authorized>
+        <h3>You are logged in.</h3>
+    </Authorized>
+
+
+</AuthorizeView>
+
+@code{
+    
+
+    private string message { get; set; } = string.Empty;
+
+    protected override  void OnInitialized()
+    {
+        var moment = DateTime.Now.Hour;
+        
+
+        if (moment> 4 && moment < 12)
+        {
+            message = "Good morning.";
+        }
+        else if(moment>11 && moment<19){
+            message = "Good afternoon.";
+        }
+        else
+        {
+            message = "Good evening.";
+        }
+    }
+
+}

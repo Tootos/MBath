@@ -576,7 +576,7 @@ namespace MBath.Server.Data
                  {
                      Id = 500,
                      ParentId = 5,
-                     URL = "products/anoksidotoi",
+                     URL = "anoksidotoi",
                      Name = "Ανοξείδωτοι Νεροχύτες",
                      ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες.jpg"
                  },
@@ -585,7 +585,7 @@ namespace MBath.Server.Data
                {
                    Id = 501,
                    ParentId = 5,
-                   URL = "products/synthetikoi",
+                   URL = "synthetikoi",
                    Name = "Νεροχύτες Συνθετικοί",
                    ImgURL = "\\Content\\Images\\Κουζίνα\\Νεροχύτες Συνθετικοί.jpg"
                },
@@ -593,7 +593,7 @@ namespace MBath.Server.Data
                 {
                     Id = 502,
                     ParentId = 5,
-                    URL = "products/mpataries",
+                    URL = "mpataries",
                     Name = "Μπαταρίες",
                     ImgURL = "\\Content\\Images\\Κουζίνα\\Μπαταρίες.jpg"
                 },

@@ -1,4 +1,4 @@
-﻿@inject IProductService ProductService
+﻿@inject IProductSrvc ProductService
 @implements IDisposable
 
 @if (ProductService.Products == null || ProductService.Products.Count == 0)
@@ -7,9 +7,6 @@
 }
 else
 {
-
-   
-
     <ul class="list-unstyled">
         @foreach (var product in ProductService.Products)
         {

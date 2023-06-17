@@ -4,7 +4,7 @@ using MBath.Shared.Models;
 
 namespace MBath.Server.Services.ProductServices
 {
-    public interface IProductService
+    public interface IProductSrvc
     {
         Task<ServiceResponse<Product>> GetProductAsync(int productId);
         Task<ServiceResponse<ProductListResponse>> GetProductsfromCategoryAsync(string categoryUrl, int page);

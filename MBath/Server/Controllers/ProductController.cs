@@ -9,8 +9,8 @@ namespace MBath.Server.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService _productService;
-        public ProductController(IProductService productService)
+        private readonly IProductSrvc _productService;
+        public ProductController(IProductSrvc productService)
         {
 
             _productService = productService;
@@ -43,7 +43,7 @@ namespace MBath.Server.Controllers
         }
 
         [HttpGet("searchsuggestions/{searchedText}")]
-        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetSuggestionProducts(string searchedText)
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetSuggestionProductsAsync(string searchedText)
         {
             var result = await _productService.GetProductSuggestionsAsync(searchedText);
 

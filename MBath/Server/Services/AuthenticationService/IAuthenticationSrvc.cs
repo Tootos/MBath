@@ -3,7 +3,7 @@ using MBath.Shared.Models;
 
 namespace MBath.Server.Services.AuthenticationServices
 {
-    public interface IAuthenticationService
+    public interface IAuthenticationSrvc
     {
         Task<ServiceResponse<int>> Register(User user, string password);
 

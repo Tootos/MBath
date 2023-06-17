@@ -3,7 +3,7 @@ using MBath.Shared.Models;
 
 namespace MBath.Server.Services.CartServices
 {
-    public interface ICartService
+    public interface ICartSrvc
     {
         Task<ServiceResponse<List<CartProductResponse>>> GetCartProductsAsync(List<CartItem> cartItems);
 

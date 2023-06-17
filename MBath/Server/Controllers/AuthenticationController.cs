@@ -11,9 +11,9 @@ namespace MBath.Server.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly IAuthenticationSrvc _authenticationService;
 
-        public AuthenticationController(IAuthenticationService authenticationService)
+        public AuthenticationController(IAuthenticationSrvc authenticationService)
         {
             _authenticationService = authenticationService;
         }

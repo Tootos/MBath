@@ -2,7 +2,7 @@
 
 namespace MBath.Client.Services.CartServices
 {
-    public interface ICartService
+    public interface ICartSrvc
     {
 
         event Action OnChange;

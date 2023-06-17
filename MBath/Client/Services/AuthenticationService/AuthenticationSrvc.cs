@@ -2,11 +2,11 @@
 
 namespace MBath.Client.Services.AuthenticationServices
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationSrvc : IAuthenticationSrvc
     {
         private readonly HttpClient _http;
 
-        public AuthenticationService(HttpClient http)
+        public AuthenticationSrvc(HttpClient http)
         {
             _http = http;
         }

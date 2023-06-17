@@ -8,9 +8,9 @@ namespace MBath.Server.Controllers
     [ApiController]
     public class CartController : ControllerBase
     {
-        private readonly ICartService _cartService;
+        private readonly ICartSrvc _cartService;
 
-        public CartController(ICartService cartService)
+        public CartController(ICartSrvc cartService)
         {
             _cartService = cartService;
         }

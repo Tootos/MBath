@@ -2,7 +2,7 @@
 
 namespace MBath.Client.Services.CartServices
 {
-    public class CartService :ICartService
+    public class CartSrvc :ICartSrvc
     {
         private readonly ILocalStorageService _localStorage;
         private readonly HttpClient _http;
@@ -10,7 +10,7 @@ namespace MBath.Client.Services.CartServices
   
         public event Action OnChange;
 
-        public CartService(ILocalStorageService localStorage, HttpClient http)
+        public CartSrvc(ILocalStorageService localStorage, HttpClient http)
         {
             _localStorage = localStorage;
             _http = http;

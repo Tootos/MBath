@@ -2,14 +2,15 @@
 
 namespace MBath.Server.Services.ProductServices
 {
-    public class ProductService : IProductService
+    public class ProductSrvc : IProductSrvc
     {
         private readonly DataContext _context;
 
-        public ProductService(DataContext context)
+        public ProductSrvc(DataContext context)
         {
             _context=context;
         }
+
         
         public async Task<ServiceResponse<Product>> GetProductAsync(int productId)
         {

@@ -26,10 +26,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ICartService,CartService>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IProductSrvc, ProductSrvc>();
+builder.Services.AddScoped<ICategorySrvc, CategorySrvc>();
+builder.Services.AddScoped<ICartSrvc,CartSrvc>();
+builder.Services.AddScoped<IAuthenticationSrvc, AuthenticationSrvc>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

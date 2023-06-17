@@ -8,9 +8,9 @@ namespace MBath.Server.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
+        private readonly ICategorySrvc _categoryService;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategorySrvc categoryService)
         {
             _categoryService = categoryService;               
         }
@@ -18,36 +18,36 @@ namespace MBath.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategoriesAsync()
         {
-            var result = await _categoryService.GetCategories();
+            var result = await _categoryService.GetCategoriesAsync();
             return Ok(result);
         }
 
         [HttpGet("parent/{parentId}")]
         public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategoryParentAsync(int parentId)
         {
-            var result = await _categoryService.GetCategoryParent(parentId);
+            var result = await _categoryService.GetCategoryParentAsync(parentId);
             return Ok(result);
         }
 
         [HttpGet("{categoryUrl}")]
         public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategoriesAsync(string categoryUrl)
         {
-            var result= await _categoryService.GetCategories(categoryUrl);
+            var result= await _categoryService.GetCategoriesAsync(categoryUrl);
             return Ok(result);
         }
        
 
         [HttpGet("hasproducts/{categoryId}")]
-        public async Task<ActionResult<bool>> DoesCategoryHaveProducts(int categoryId)//To be removed
+        public async Task<ActionResult<ServiceResponse<bool>>> DoesCategoryHaveProductsAsync(int categoryId)
         {
-            var result = await _categoryService.DoesCategoryHaveProducts(categoryId);
+            var result = await _categoryService.DoesCategoryHaveProductsAsync(categoryId);
             return Ok(result);
         }
 
         [HttpGet("parents")]
         public async Task<ActionResult<ServiceResponse<List<Category>>>> GetParentCategoriesAsync()
         {
-            var result = await _categoryService.GetParentCategories();
+            var result = await _categoryService.GetParentCategoriesAsync();
             return Ok(result);
         }
 

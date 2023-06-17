@@ -1,7 +1,7 @@
 ﻿@page "/product/{Id:int}"
-@inject ICartService CartService
+@inject ICartSrvc CartService
 
-@inject IProductService ProductService
+@inject IProductSrvc ProductService
 @if (product == null)
 {
     <span>@message</span>
@@ -52,6 +52,9 @@ else
     private string message = "Loading product... ";
 
     private int currentVariantId = 1;
+
+    private bool hasProducts { get; set; } = false;
+
 
     [Parameter]
     public int Id { get; set; }

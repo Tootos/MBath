@@ -4,23 +4,31 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace MBath.Server.Services.CategoryServices
 {
-    public class CategoryService : ICategoryService
+    public class CategorySrvc : ICategorySrvc
     {
         private readonly DataContext _context;
 
-        public CategoryService(DataContext context)
+        public CategorySrvc(DataContext context)
         {
             _context = context;
         }
 
-        public Task<bool> DoesCategoryHaveProducts(int categoryID)//To be removed
+        public async Task<ServiceResponse<bool>> DoesCategoryHaveProductsAsync(int categoryId)
         {
-            return Task.FromResult(_context.Products
-                .Any(p => p.CategoryId == categoryID));
-
+            if (await _context.Products.AnyAsync(p => p.CategoryId == categoryId))
+            {
+                return new ServiceResponse<bool>
+                {
+                    Data = true
+                };
+            }
+            return new ServiceResponse<bool>
+            {
+                Success = false
+            };
         }
 
-        public async Task<ServiceResponse<List<Category>>> GetCategories()
+        public async Task<ServiceResponse<List<Category>>> GetCategoriesAsync()
         {
             var response = new ServiceResponse<List<Category>>()
             {
@@ -29,7 +37,7 @@ namespace MBath.Server.Services.CategoryServices
             return response;
         }
 
-        public async Task<ServiceResponse<List<Category>>> GetParentCategories()
+        public async Task<ServiceResponse<List<Category>>> GetParentCategoriesAsync()
         {
             var response = new ServiceResponse<List<Category>>()
             {
@@ -38,10 +46,13 @@ namespace MBath.Server.Services.CategoryServices
             return response;
         }
 
-        public async Task<ServiceResponse<List<Category>>> GetCategories(string? categoryURL= null)
+        public async Task<ServiceResponse<List<Category>>> GetCategoriesAsync(string? categoryURL= null)
         {
             var response= new ServiceResponse<List<Category>>();            
-
+            if(categoryURL == null)
+            {
+                return response;
+            }
                 var parent = await _context.Categories.Where(p => p.URL == categoryURL).FirstOrDefaultAsync();
                 if(parent!=null)
                 {
@@ -51,7 +62,7 @@ namespace MBath.Server.Services.CategoryServices
             return response;
         }
 
-        public async Task<ServiceResponse<Category>> GetCategoryParent(int parentId)
+        public async Task<ServiceResponse<Category>> GetCategoryParentAsync(int parentId)
         {
             var response = new ServiceResponse<Category>()
             {

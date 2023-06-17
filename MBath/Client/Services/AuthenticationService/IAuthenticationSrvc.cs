@@ -1,6 +1,6 @@
 ﻿namespace MBath.Client.Services.AuthenticationServices
 {
-    public interface IAuthenticationService
+    public interface IAuthenticationSrvc
     {
         Task<ServiceResponse<int>> Register(UserRegister request);
 

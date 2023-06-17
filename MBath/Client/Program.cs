@@ -20,10 +20,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ICartService,CartService>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IProductSrvc, ProductSrvc>();
+builder.Services.AddScoped<ICategorySrvc, CategorySrvc>();
+builder.Services.AddScoped<ICartSrvc,CartSrvc>();
+builder.Services.AddScoped<IAuthenticationSrvc, AuthenticationSrvc>();
 
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();

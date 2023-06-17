@@ -2,11 +2,11 @@
 
 namespace MBath.Server.Services.CartServices
 {
-    public class CartService : ICartService
+    public class CartSrvc : ICartSrvc
     {
         private readonly  DataContext _context;
 
-        public CartService(DataContext context)
+        public CartSrvc(DataContext context)
         {
             _context = context;
         }

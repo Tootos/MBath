@@ -4,7 +4,7 @@ using System.Net.Http.Json;
 
 namespace MBath.Client.Services.ProductServices
 {
-    public class ProductService : IProductService
+    public class ProductSrvc : IProductSrvc
     {
         public string Message { get; set; } = "Loading. . .";
         public List<Product> Products { get; set; }= new List<Product>();
@@ -19,7 +19,7 @@ namespace MBath.Client.Services.ProductServices
 
         private readonly HttpClient _http;
 
-        public ProductService(HttpClient http)
+        public ProductSrvc(HttpClient http)
         {
             _http=http;
         }
