@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Json;
 
-namespace MBath.Client.Services.CategoryServices
+namespace MBath.Client.Services.CategoryService
 {
     public class CategorySrvc : ICategorySrvc
     {

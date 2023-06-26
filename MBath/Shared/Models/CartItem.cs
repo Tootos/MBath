@@ -8,6 +8,7 @@ namespace MBath.Shared.Models
 {
     public class CartItem
     {
+        public int UserId { get; set; }   
         public int ProductId { get; set; }
 
         public int VariantId { get; set; }

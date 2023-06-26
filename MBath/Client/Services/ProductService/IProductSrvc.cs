@@ -1,4 +1,4 @@
-﻿namespace MBath.Client.Services.ProductServices
+﻿namespace MBath.Client.Services.ProductService
 {
     public interface IProductSrvc
     {

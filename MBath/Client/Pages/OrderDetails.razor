@@ -1,0 +1,51 @@
+﻿@page "/orders/{orderId:int}"
+@inject IOrderSrvc OrderService
+
+@if (order == null)
+{
+    <span>Loading Order Details. . .</span>
+}
+else
+{
+    <h3>Order from @order.OrderDate</h3>
+
+    <div>
+        @foreach (var product in order.Products)
+        {
+            <div class="container">
+                <div class="image-wrapper">
+                    <img src="@product.ImgUrl" class="image" />
+                </div>
+                <div class="name">
+                    <h5><a href="/product/@product.ProductId">@product.ProductName</a></h5>
+                    <span>@product.VariantName</span><br />
+                    <span>Quantity: @product.Quantity</span>
+                </div>
+                <div class="product-price">$@product.TotalPrice</div>
+            </div>
+        }
+        <div class="product-price">
+            Total: $@order.TotalPrice
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public int orderId { get; set; }
+
+    OrderDetailsResponse order = null;
+
+    protected async override Task OnInitializedAsync()
+    {
+        order = await OrderService.GetOrderDetails(orderId);
+
+        foreach (var p in order.Products)
+        {
+            Console.WriteLine("Product Name: " + p.ProductName + "\nVariantName: " + p.VariantName + "\nPrice: " + p.TotalPrice+"\nUrl: "+p.ImgUrl);
+    }
+
+    }
+
+}

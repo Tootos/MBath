@@ -1,16 +1,20 @@
 global using MBath.Shared;
+global using MBath.Shared.Models;
+global using MBath.Shared.Models.UserModels;
+global using MBath.Shared.DataTransferObjects;
 global using Microsoft.EntityFrameworkCore;
 global using MBath.Server.Data;
 global using MBath.Server.Services.ProductServices;
 global using MBath.Server.Services.CategoryServices;
 global using MBath.Server.Services.CartServices;
 global using MBath.Server.Services.AuthenticationServices;
-global using MBath.Shared.DataTransferObjects;
+global using MBath.Server.Services.OrderService;
+global using MBath.Server.Services.PaymentService;
+global using MBath.Server.Services.AddressService;
 
 using Microsoft.IdentityModel.Tokens;
-
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +33,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductSrvc, ProductSrvc>();
 builder.Services.AddScoped<ICategorySrvc, CategorySrvc>();
 builder.Services.AddScoped<ICartSrvc,CartSrvc>();
+builder.Services.AddScoped<IOrderSrvc,OrderSrvc>();
+builder.Services.AddScoped<IPaymentSrvc, PaymentSrvc>();
 builder.Services.AddScoped<IAuthenticationSrvc, AuthenticationSrvc>();
+builder.Services.AddScoped<IAddressSrvc, AddressSrvc>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -44,6 +51,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
 
     });
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

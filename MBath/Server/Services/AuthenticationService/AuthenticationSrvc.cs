@@ -1,8 +1,5 @@
-﻿using MBath.Shared.Models;
-using MBath.Shared.Models.UserModels;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
@@ -12,11 +9,15 @@ namespace MBath.Server.Services.AuthenticationServices
     {
         private readonly DataContext _context;
         private readonly IConfiguration _confirguration;
+        private readonly IHttpContextAccessor _accessor;
 
-        public AuthenticationSrvc(DataContext context, IConfiguration confirguration)
+        public AuthenticationSrvc(DataContext context, 
+            IConfiguration confirguration, 
+            IHttpContextAccessor accessor)
         {
             _context = context;
             _confirguration = confirguration;
+            _accessor = accessor;
         }
 
         public async Task<ServiceResponse<int>> Register(User user, string password)
@@ -27,9 +28,6 @@ namespace MBath.Server.Services.AuthenticationServices
                     Message= "Email already in use.",
                     Success = false };
             }
-
-            
-
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
             user.PasswordHash = passwordHash;
@@ -66,9 +64,7 @@ namespace MBath.Server.Services.AuthenticationServices
             return response;
 
         }
-
-        
-
+     
         public async Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
         {
             var user = await _context.Users.FindAsync(userId);
@@ -93,6 +89,10 @@ namespace MBath.Server.Services.AuthenticationServices
             return new ServiceResponse<bool> { Data = true, Message="Password succesfully changed." };
         }
 
+        public int GetUserId() => int.Parse(_accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+        public string GetUserEmail() => _accessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+        public async Task<User> GetUser(string email) => await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+ 
         private string? CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
@@ -143,5 +143,8 @@ namespace MBath.Server.Services.AuthenticationServices
                 return passwordHash.SequenceEqual(computedHash);
             }
         }
+
+       
+        
     }
 }

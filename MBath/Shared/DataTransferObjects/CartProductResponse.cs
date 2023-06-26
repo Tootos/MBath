@@ -11,8 +11,8 @@ namespace MBath.Shared.DataTransferObjects
         public int ProductId { get; set; }
 
         public string ProductName { get; set; } = string.Empty;
-
         public int VariantId { get; set; }
+        public string VariantName { get; set; } = string.Empty;
         public string ImgUrl { get; set; } = string.Empty;
 
         public decimal Price { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MBath.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230616071000_User")]
-    partial class User
+    [Migration("20230621084140_Orders")]
+    partial class Orders
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,25 @@ namespace MBath.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("MBath.Shared.Models.CartItem", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VariantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "ProductId", "VariantId");
+
+                    b.ToTable("CartItems");
+                });
 
             modelBuilder.Entity("MBath.Shared.Models.Category", b =>
                 {
@@ -219,7 +238,7 @@ namespace MBath.Server.Migrations
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες.jpg",
                             Name = "Ανοξείδωτοι Νεροχύτες",
                             ParentId = 5,
-                            URL = "products/anoksidotoi"
+                            URL = "anoksidotoi"
                         },
                         new
                         {
@@ -227,7 +246,7 @@ namespace MBath.Server.Migrations
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Νεροχύτες Συνθετικοί.jpg",
                             Name = "Νεροχύτες Συνθετικοί",
                             ParentId = 5,
-                            URL = "products/synthetikoi"
+                            URL = "synthetikoi"
                         },
                         new
                         {
@@ -235,7 +254,7 @@ namespace MBath.Server.Migrations
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Μπαταρίες.jpg",
                             Name = "Μπαταρίες",
                             ParentId = 5,
-                            URL = "products/mpataries"
+                            URL = "mpataries"
                         },
                         new
                         {
@@ -261,6 +280,52 @@ namespace MBath.Server.Migrations
                             ParentId = 0,
                             URL = "thermansi"
                         });
+                });
+
+            modelBuilder.Entity("MBath.Shared.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("MBath.Shared.Models.OrderItem", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VariantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OrderId", "VariantId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("MBath.Shared.Models.Product", b =>
@@ -730,6 +795,25 @@ namespace MBath.Server.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MBath.Shared.Models.OrderItem", b =>
+                {
+                    b.HasOne("MBath.Shared.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MBath.Shared.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("MBath.Shared.Models.Product", b =>
                 {
                     b.HasOne("MBath.Shared.Models.Category", "Category")
@@ -750,6 +834,11 @@ namespace MBath.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MBath.Shared.Models.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("MBath.Shared.Models.Product", b =>

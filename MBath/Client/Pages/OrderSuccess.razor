@@ -1,0 +1,13 @@
+﻿@page "/order-success"
+@inject ICartSrvc CartService
+
+<h3>Thank you for ordering from us!</h3>
+
+<span>You can check your orders status and further details <a href="orders">here</a>.</span>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await CartService.GetCartItemsCount();
+    }
+}

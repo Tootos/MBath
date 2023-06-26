@@ -2,7 +2,7 @@
 
 using System.Net.Http.Json;
 
-namespace MBath.Client.Services.ProductServices
+namespace MBath.Client.Services.ProductService
 {
     public class ProductSrvc : IProductSrvc
     {

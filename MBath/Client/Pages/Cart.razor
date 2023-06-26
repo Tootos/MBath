@@ -1,5 +1,10 @@
 ﻿@page "/cart"
 @inject ICartSrvc CartService
+@inject IOrderSrvc OrderService
+@inject NavigationManager NavigationManager
+@inject IAuthenticationSrvc AuthenticationService
+
+<PageTitle>Your Cart</PageTitle>
 
 @if (cartProducts == null|| cartProducts.Count==0)
 {
@@ -15,7 +20,8 @@ else
                     <img src="@product.ImgUrl" class="image"/>
                 </div>
                 <div class="name">
-                    <h5> <a href="/product/@product.ProductId">@product.ProductName</a></h5>                   
+                    <h5> <a href="/product/@product.ProductId">@product.ProductName</a></h5>   
+                    <p>@product.VariantName</p>
                     <input type="number" value="@product.Quantity"
                     @onchange="@((ChangeEventArgs e) => UpdateQuantity(e,product))"
                     class="form-control input-quantity"
@@ -30,7 +36,13 @@ else
         <div class="cart-product-price">
             Total (@cartProducts.Count) : $ @cartProducts.Sum(@product=>product.Price*product.Quantity)
         </div>
-        </div>
+    </div>
+    if (isAuthenticated)
+    {
+        <h5>Delivery Address</h5>
+        <AddressForm/>
+    }
+    <button @onclick= "PlaceOrder" class="btn alert-success float-end mt-1">Checkout</button>
 
 }
 
@@ -42,23 +54,26 @@ else
 
     string message = "Loading your cart...";
 
+    bool OrderPlaced = false;
+
+    bool isAuthenticated = false;
+
     protected override async Task OnInitializedAsync()
     {
+        isAuthenticated = await AuthenticationService.IsAuthenticated();
         await LoadCart();
     }
 
-
-
     private async Task LoadCart()
     {
-        if ((await CartService.GetCartProductsAsync()).Count == 0)
+        await CartService.GetCartItemsCount();
+
+        cartProducts = await CartService.GetCartProductsAsync();
+
+        if (cartProducts == null || cartProducts.Count==0)
         {
             message = "Your cart is empty.";
             cartProducts = new List<CartProductResponse>();
-        }
-        else
-        {
-            cartProducts = await CartService.GetCartProductsAsync();
         }
     }
 
@@ -74,5 +89,17 @@ else
         item.Quantity = int.Parse(e.Value.ToString());       
 
         await CartService.UpdateQuantity(item);
+    }
+
+    private async Task PlaceOrder()
+    {
+        string url= await OrderService.CreateOrder();
+        NavigationManager.NavigateTo(url);
+
+        /*
+        await CartService.GetCartItemsCount();
+
+        OrderPlaced = true;
+        */
     }
 }

@@ -53,6 +53,7 @@ namespace MBath.Server.Controllers
 
             if(response.Success)
                 return Ok(response);
+
             return BadRequest(response);
         }
 

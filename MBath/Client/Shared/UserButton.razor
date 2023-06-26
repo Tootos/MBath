@@ -1,6 +1,7 @@
 ﻿@inject ILocalStorageService LocalStorageService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
+@inject ICartSrvc CartService
 
 <div class="dropdown">
     <button @onclick="ToggleUserMenu"
@@ -12,6 +13,7 @@
         <AuthorizeView>
             <Authorized>
                 <a href="profile" class="dropdown-item">Your Profile</a>
+                <a href="orders" class="dropdown-item">Orders</a>
                 <hr />
                 <button class="dropdown-item" @onclick="Logout">Log out</button>
             </Authorized>
@@ -45,6 +47,7 @@
     {
         await LocalStorageService.RemoveItemAsync("authToken");
         await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        await CartService.GetCartItemsCount();
         NavigationManager.NavigateTo("");
     }
 

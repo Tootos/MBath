@@ -1,7 +1,4 @@
-﻿using MBath.Shared.Models;
-using MBath.Shared.Models.UserModels;
-
-namespace MBath.Server.Data
+﻿namespace MBath.Server.Data
 {
     public class DataContext: DbContext
     {
@@ -15,9 +12,20 @@ namespace MBath.Server.Data
 
         public DbSet<User> Users { get; set; }
 
-      
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CartItem>()
+                .HasKey(c => new { c.UserId, c.ProductId, c.VariantId });
+
+
+            modelBuilder.Entity<OrderItem>()
+                .HasKey(oi => new { oi.OrderId, oi.VariantId, oi.ProductId });
+
             modelBuilder.Entity<Variant>().HasData(
                 new Variant
                 {

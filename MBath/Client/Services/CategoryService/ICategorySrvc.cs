@@ -1,4 +1,4 @@
-﻿namespace MBath.Client.Services.CategoryServices
+﻿namespace MBath.Client.Services.CategoryService
 {
     public interface ICategorySrvc
     {
