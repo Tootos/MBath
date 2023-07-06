@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace MBath.Shared.Models
 {
-    public class Variant
+    public class ProductVariantInfo
     {
+        [JsonIgnore]
+        public Product? Product { get; set; }
+        public int ProductId { get; set; }
+        public Variant? Variant { get; set; }
+        public int VariantId { get; set; }
 
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Price { get; set; }
         public bool Visible { get; set; } = true;
         public bool Deleted { get; set; } = false;
         [NotMapped]

@@ -42,6 +42,7 @@ namespace MBath.Server.Services.AddressService
                 dbAddress.PostalCode= address.PostalCode;
                 dbAddress.Country= address.Country;
 
+                response.Data= dbAddress;
 
             }
             await _context.SaveChangesAsync();

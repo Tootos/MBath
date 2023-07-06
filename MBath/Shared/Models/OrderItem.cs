@@ -12,7 +12,8 @@ namespace MBath.Shared.Models
         public Order Order { get; set; }
         public int OrderId { get; set; }
         public Product Product { get; set; }
-        public int ProductId { get; set; }        
+        public int ProductId { get; set; }    
+        public Variant Variant { get; set; }
         public int VariantId { get; set; }
         public int Quantity { get; set; }
 

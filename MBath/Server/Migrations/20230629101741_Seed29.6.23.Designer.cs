@@ -4,6 +4,7 @@ using MBath.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MBath.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230629101741_Seed29.6.23")]
+    partial class Seed29623
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,13 +99,7 @@ namespace MBath.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoriesId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasProducts")
                         .HasColumnType("bit");
 
                     b.Property<string>("ImgURL")
@@ -116,7 +113,7 @@ namespace MBath.Server.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Url")
+                    b.Property<string>("URL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -125,8 +122,6 @@ namespace MBath.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriesId");
-
                     b.ToTable("Categories");
 
                     b.HasData(
@@ -134,286 +129,260 @@ namespace MBath.Server.Migrations
                         {
                             Id = 1,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση.jpg",
                             Name = "'Υδρευση",
                             ParentId = 0,
-                            Url = "ydreusi",
+                            URL = "ydreusi",
                             Visible = true
                         },
                         new
                         {
                             Id = 2,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Αποχέτευση.jpg",
                             Name = "Αποχέτευση",
                             ParentId = 0,
-                            Url = "apoxeteusi",
+                            URL = "apoxeteusi",
                             Visible = true
                         },
                         new
                         {
                             Id = 3,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Θερμοσίφωνα.jpg",
                             Name = "Θερμοσίφωνα",
                             ParentId = 0,
-                            Url = "thermosifona",
+                            URL = "thermosifona",
                             Visible = true
                         },
                         new
                         {
                             Id = 4,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Μπάνιο.jpg",
                             Name = "Μπάνιο",
                             ParentId = 0,
-                            Url = "mpanio",
+                            URL = "mpanio",
                             Visible = true
                         },
                         new
                         {
                             Id = 5,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Κουζίνα.jpg",
                             Name = "Κουζίνα",
                             ParentId = 0,
-                            Url = "kouzina",
+                            URL = "kouzina",
                             Visible = true
                         },
                         new
                         {
                             Id = 100,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα.jpg",
                             Name = "Εξαρτήματα",
                             ParentId = 1,
-                            Url = "eksartimata",
+                            URL = "eksartimata",
                             Visible = true
                         },
                         new
                         {
                             Id = 101,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Σωλήνες.jpg",
                             Name = "Σωλήνες",
                             ParentId = 1,
-                            Url = "solines",
+                            URL = "solines",
                             Visible = true
                         },
                         new
                         {
                             Id = 102,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Διακόπτες_Κάνουλες.jpg",
                             Name = "Διακόπτες - Κάνουλες",
                             ParentId = 1,
-                            Url = "diakoptes",
+                            URL = "diakoptes",
                             Visible = true
                         },
                         new
                         {
                             Id = 103,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Στηρίγματα.jpg",
                             Name = "Στηρίγματα",
                             ParentId = 1,
-                            Url = "stirigmata",
+                            URL = "stirigmata",
                             Visible = true
                         },
                         new
                         {
                             Id = 104,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Στηρίγματα.jpg",
                             Name = "Συλλέκτες",
                             ParentId = 100,
-                            Url = "syllektes",
+                            URL = "syllektes",
                             Visible = true
                         },
                         new
                         {
                             Id = 100001,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Χάλκινα Εξαρτήματα.jpg",
                             Name = "Χάλκινα Εξαρτήματα",
                             ParentId = 100,
-                            Url = "xalkina",
+                            URL = "xalkina",
                             Visible = true
                         },
                         new
                         {
                             Id = 10002,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Ορειχάλκινα Εξαρτήματα.jpg",
                             Name = "Ορειχάλκινα Εξαρτήματα",
                             ParentId = 100,
-                            Url = "orihalkina",
+                            URL = "orihalkina",
                             Visible = true
                         },
                         new
                         {
                             Id = 10003,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Σιδερένια εξαρτήματα.jpg",
                             Name = "Σιδερένια εξαρτήματα",
                             ParentId = 100,
-                            Url = "siderenia",
+                            URL = "siderenia",
                             Visible = true
                         },
                         new
                         {
                             Id = 100004,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυαιθυλενίου.jpg",
                             Name = "Εξαρτήματα Πολυαιθυλενίου",
                             ParentId = 100,
-                            Url = "polyethileniou",
+                            URL = "polyethileniou",
                             Visible = true
                         },
                         new
                         {
                             Id = 100005,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυπροπυλενίου.jpg",
                             Name = "Εξαρτήματα Πολυπροπυλενίου",
                             ParentId = 100,
-                            Url = "polypropileniou",
+                            URL = "polypropileniou",
                             Visible = true
                         },
                         new
                         {
                             Id = 100006,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυστρωματικής.jpg",
                             Name = "Εξαρτήματα Πολυστρωματικής",
                             ParentId = 100,
-                            Url = "polystromatikis",
+                            URL = "polystromatikis",
                             Visible = true
                         },
                         new
                         {
                             Id = 200,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Σωλήνες PVC",
                             ParentId = 2,
-                            Url = "solinespvc",
+                            URL = "solinespvc",
                             Visible = true
                         },
                         new
                         {
                             Id = 201,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Σιφώνια αποχέτευσης",
                             ParentId = 2,
-                            Url = "sifoniaapoxeteusis",
+                            URL = "sifoniaapoxeteusis",
                             Visible = true
                         },
                         new
                         {
                             Id = 300,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Ηλεκτρομπόιλερ",
                             ParentId = 3,
-                            Url = "hlectroboiler",
+                            URL = "hlectroboiler",
                             Visible = true
                         },
                         new
                         {
                             Id = 301,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Ηλεκτρικά Θερμοσίφωνα",
                             ParentId = 3,
-                            Url = "elektrikathermosifona",
+                            URL = "elektrikathermosifona",
                             Visible = true
                         },
                         new
                         {
                             Id = 500,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες.jpg",
                             Name = "Ανοξείδωτοι Νεροχύτες",
                             ParentId = 5,
-                            Url = "anoksidotoi",
+                            URL = "anoksidotoi",
                             Visible = true
                         },
                         new
                         {
                             Id = 501,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Νεροχύτες Συνθετικοί.jpg",
                             Name = "Νεροχύτες Συνθετικοί",
                             ParentId = 5,
-                            Url = "synthetikoi",
+                            URL = "synthetikoi",
                             Visible = true
                         },
                         new
                         {
                             Id = 502,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Μπαταρίες.jpg",
                             Name = "Μπαταρίες",
                             ParentId = 5,
-                            Url = "mpataries",
+                            URL = "mpataries",
                             Visible = true
                         },
                         new
                         {
                             Id = 503,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Απορροφητήρες.jpg",
                             Name = "Απορροφητήρες",
                             ParentId = 5,
-                            Url = "aporrofitires",
+                            URL = "aporrofitires",
                             Visible = true
                         },
                         new
                         {
                             Id = 504,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Αξεσουάρ Κουζίνας ανταλλακτικά.jpg",
                             Name = "Αξεσουάρ Κουζίνας",
                             ParentId = 5,
-                            Url = "aksesouar",
+                            URL = "aksesouar",
                             Visible = true
                         },
                         new
                         {
                             Id = 6,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Θέρμανση",
                             ParentId = 0,
-                            Url = "thermansi",
+                            URL = "thermansi",
                             Visible = true
                         });
                 });
@@ -477,9 +446,6 @@ namespace MBath.Server.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -492,9 +458,6 @@ namespace MBath.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -506,65 +469,53 @@ namespace MBath.Server.Migrations
                         {
                             Id = 1,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8310.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8310",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8310"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 100x50 VENEZIA 8312.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 100x50 VENEZIA 8312",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 100x50 VENEZIA 8312"
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 116x50 VENEZIA 8316.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 116x50 VENEZIA 8316",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 116x50 VENEZIA 8316"
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8320.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8320",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8320"
                         },
                         new
                         {
                             Id = 5,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8330.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8330",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8330"
                         },
                         new
                         {
                             Id = 6,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 79x50 VENEZIA 8380.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 79x50 VENEZIA 8380",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 79x50 VENEZIA 8380"
                         });
                 });
 
-            modelBuilder.Entity("MBath.Shared.Models.ProductVariantInfo", b =>
+            modelBuilder.Entity("MBath.Shared.Models.ProductVariant", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -572,14 +523,8 @@ namespace MBath.Server.Migrations
                     b.Property<int>("VariantId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
 
                     b.HasKey("ProductId", "VariantId");
 
@@ -592,89 +537,67 @@ namespace MBath.Server.Migrations
                         {
                             ProductId = 1,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 145.00m,
-                            Visible = true
+                            Price = 145.00m
                         },
                         new
                         {
                             ProductId = 1,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 160.00m,
-                            Visible = true
+                            Price = 160.00m
                         },
                         new
                         {
                             ProductId = 2,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 145.00m,
-                            Visible = true
+                            Price = 145.00m
                         },
                         new
                         {
                             ProductId = 3,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 160.00m,
-                            Visible = true
+                            Price = 160.00m
                         },
                         new
                         {
                             ProductId = 3,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 175.00m,
-                            Visible = true
+                            Price = 175.00m
                         },
                         new
                         {
                             ProductId = 4,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 170.00m,
-                            Visible = true
+                            Price = 170.00m
                         },
                         new
                         {
                             ProductId = 4,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 185.00m,
-                            Visible = true
+                            Price = 185.00m
                         },
                         new
                         {
                             ProductId = 5,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 155.00m,
-                            Visible = true
+                            Price = 155.00m
                         },
                         new
                         {
                             ProductId = 5,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 165.00m,
-                            Visible = true
+                            Price = 165.00m
                         },
                         new
                         {
                             ProductId = 6,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 155.00m,
-                            Visible = true
+                            Price = 155.00m
                         },
                         new
                         {
                             ProductId = 6,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 165.00m,
-                            Visible = true
+                            Price = 165.00m
                         });
                 });
 
@@ -718,9 +641,6 @@ namespace MBath.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -728,9 +648,6 @@ namespace MBath.Server.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -740,18 +657,14 @@ namespace MBath.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Deleted = false,
                             Description = "",
-                            Name = "Λεία επιφάνεια",
-                            Visible = true
+                            Name = "Λεία επιφάνεια"
                         },
                         new
                         {
                             Id = 2,
-                            Deleted = false,
                             Description = "",
-                            Name = "Σαγρέ επιφάνεια",
-                            Visible = true
+                            Name = "Σαγρέ επιφάνεια"
                         });
                 });
 
@@ -762,15 +675,6 @@ namespace MBath.Server.Migrations
                         .HasForeignKey("MBath.Shared.Models.Address", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MBath.Shared.Models.Category", b =>
-                {
-                    b.HasOne("MBath.Shared.Models.Category", "Categories")
-                        .WithMany()
-                        .HasForeignKey("CategoriesId");
-
-                    b.Navigation("Categories");
                 });
 
             modelBuilder.Entity("MBath.Shared.Models.OrderItem", b =>
@@ -811,10 +715,10 @@ namespace MBath.Server.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("MBath.Shared.Models.ProductVariantInfo", b =>
+            modelBuilder.Entity("MBath.Shared.Models.ProductVariant", b =>
                 {
                     b.HasOne("MBath.Shared.Models.Product", "Product")
-                        .WithMany("ProductVariants")
+                        .WithMany("ProductVariant")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -837,7 +741,7 @@ namespace MBath.Server.Migrations
 
             modelBuilder.Entity("MBath.Shared.Models.Product", b =>
                 {
-                    b.Navigation("ProductVariants");
+                    b.Navigation("ProductVariant");
                 });
 
             modelBuilder.Entity("MBath.Shared.Models.UserModels.User", b =>

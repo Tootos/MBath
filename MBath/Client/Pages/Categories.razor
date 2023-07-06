@@ -2,29 +2,57 @@
 @page "/{categoryUrl}"
 
 @inject ICategorySrvc CategoryService
+@inject IProductSrvc ProductService
+@inject NavigationManager NavigationManager
 
-<CategoryList/>
+
+@if (_categories == null || _categories.Count == 0)
+{
+    <span>@CategoryService.Message</span>
+}
+else
+{
+    <ul class="list-unstyled">
+        @foreach (var category in _categories)
+        {
+            <li class="media my-3" @onclick="@(()=>OnClickHandler(category))">
+
+                <div class="media-img-body mr-2">
+                    <img class="media-img" src="@category.ImgURL" alt="@category.Name" />
+                </div>
+                <div class="media-body">
+                    <h4>@category.Name</h4>
+
+                </div>
+            </li>
+        }
+
+    </ul>
+}
 
 
 @code {
-    [Parameter]
-    public string categoryUrl { get; set; }
+    List<Category> _categories = null;
 
-    public bool hasProducts = false;
-   
+    [Parameter]
+    public string categoryUrl { get; set; }   
+
     protected override async Task OnParametersSetAsync()
     {
-        
-        if (categoryUrl==null)
-        {
+        _categories = CategoryService.ShowCategoriesByUrl(categoryUrl);
+    }
 
-            await CategoryService.GetParentCategoriesAsync();
+    private async Task OnClickHandler(Category category)
+    {
+
+        if (category.HasProducts)
+        {
+            NavigationManager.NavigateTo("products/" + category.Url + "/1");
         }
         else
         {
-            await CategoryService.GetCategoriesAsync(categoryUrl);
-        }                 
-        
-    }
+            NavigationManager.NavigateTo(category.Url);
+        }
 
+    }
 }

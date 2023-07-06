@@ -4,6 +4,7 @@
     {
         event Action ProductsChanged;
         List<Product> Products { get; set; }
+        List<Product> AdminProducts { get; set; }
 
         string Message { get; set; }
         int CurrentPage { get; set; }
@@ -18,5 +19,12 @@
         Task SearchProductsAsync(string searchedText, int page);
         Task<List<string>> GetProductSuggestions(string searchedText);
 
+        Task GetAdminProductsAsync();
+
+        Task<Product> AddProductAsync(Product product);
+
+        Task<Product> UpdateProductAsync(Product product);
+
+        Task DeleteProductAsync(int productId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MBath.Server.Controllers
@@ -48,6 +49,34 @@ namespace MBath.Server.Controllers
             return Ok(result);
         }
 
+        [HttpGet("admin"), Authorize(Roles ="Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetAdminProductAsync()
+        {
+            var result = await _productService.GetAdminProductAsync();
+
+            return Ok(result);
+        }
+        [HttpPost("admin"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<Product>>> AddProductAsync(Product product)
+        {
+            var result = await _productService.AddProduct(product);
+
+            return Ok(result);
+        }
+        [HttpPut("admin"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<Product>>> UpdateProductAsync(Product product)
+        {
+            var result = await _productService.UpdateProduct(product);
+
+            return Ok(result);
+        }
+        [HttpDelete("admin/{productId}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<bool>>> DeleteProductAsync(int productId)
+        {
+            var result = await _productService.DeleteProduct(productId);
+
+            return Ok(result);
+        }
 
     }
 }

@@ -3,6 +3,7 @@ global using MBath.Client.Services.ProductService;
 global using MBath.Client.Services.CartService;
 global using MBath.Client.Services.AuthenticationService;
 global using MBath.Client.Services.OrderService;
+global using MBath.Client.Services.VariantService;
 global using MBath.Shared.DataTransferObjects;
 global using MBath.Shared.Models;
 global using MBath.Shared.Models.UserModels;
@@ -25,6 +26,7 @@ builder.Services.AddScoped<ICategorySrvc, CategorySrvc>();
 builder.Services.AddScoped<ICartSrvc,CartSrvc>();
 builder.Services.AddScoped<IOrderSrvc,OrderSrvc>();
 builder.Services.AddScoped<IAddressSrvc, AddressSrvc>();
+builder.Services.AddScoped<IVariantSrvc, VariantSrvc>();
 
 builder.Services.AddScoped<IAuthenticationSrvc, AuthenticationSrvc>();
 

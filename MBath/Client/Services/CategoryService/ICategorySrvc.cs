@@ -6,12 +6,18 @@
         event Action CategoriesChanged; 
         List<Category> Categories { get; set; }
 
-        Task<ServiceResponse<List<Category>>> GetCategoriesAsync();       
-        Task GetCategoriesAsync(string categoryUrl);
+        List<Category> AdminCategories { get; set; }
+    
+        Task GetCategoriesAsync();
 
-        Task<bool> HasProductsAsync(int categoryId);
-        Task GetParentCategoriesAsync();
-       
+        Task GetAdminCategories();
+        Task AddCategory(Category category);
+        Task DeleteCategory(int categoryId);
+        Task UpdateCategory(Category category);
+
+        Category CreateNewCategory();
+
+        List<Category> ShowCategoriesByUrl(string? categoryUrl); 
 
 
 

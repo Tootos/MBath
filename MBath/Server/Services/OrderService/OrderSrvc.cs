@@ -59,9 +59,11 @@ namespace MBath.Server.Services.OrderService
             var response = new ServiceResponse<OrderDetailsResponse>();
             var order = await _context.Orders
                 .Include(o => o.OrderItems)
-                .ThenInclude(oi =>oi.Product).ThenInclude(p => p.Variants)
+                .ThenInclude(oi => oi.Product)
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Variant)
                 .Where(o => o.UserId == _authentication.GetUserId() && o.Id == orderId)
-                .OrderByDescending(o => o.OrderDate).FirstOrDefaultAsync();
+                .OrderBy(o => o.OrderDate).FirstOrDefaultAsync();
 
             if (order == null)
             {
@@ -78,16 +80,14 @@ namespace MBath.Server.Services.OrderService
 
             order.OrderItems.ForEach(oi => orderDetailsResponse.Products.Add(new OrderDetailsProductResponse
             {
-                ProductId= oi.ProductId,
-                ProductName= oi.Product.Name,
-                Quantity= oi.Quantity,
-                ImgUrl= oi.Product.ImgURL,
-                TotalPrice= oi.TotalPrice,
-                VariantName= oi.Product.Variants.FirstOrDefault(v =>v.Id==oi.VariantId).Name,
-                
-                
+                ProductId = oi.ProductId,
+                ProductName = oi.Product.Name,
+                Quantity = oi.Quantity,
+                ImgUrl = oi.Product.ImgURL,
+                TotalPrice = oi.TotalPrice,
+                VariantName = oi.Variant.Name
 
-            }));
+            })) ;
 
             response.Data = orderDetailsResponse;
 

@@ -28,9 +28,10 @@ namespace MBath.Server.Services.CartServices
 
                 if (product != null)
                 {
-                    var variant= await _context.Variants
-                        .Where(v=>v.Id==item.VariantId).FirstOrDefaultAsync();
-                    if(variant != null)
+                    var productVariant = await _context.ProductVariants
+                        .Where(pv => pv.ProductId == item.ProductId && pv.VariantId == item.VariantId)
+                        .Include(pv => pv.Variant).FirstOrDefaultAsync();
+                    if(productVariant != null)
                     {
                         var cartProduct = new CartProductResponse()
                         {
@@ -38,9 +39,9 @@ namespace MBath.Server.Services.CartServices
                             ProductId = product.Id,
                             ProductName = product.Name,
                             ImgUrl = product.ImgURL,
-                            VariantId= variant.Id,
-                            VariantName = variant.Name,
-                            Price = variant.Price,
+                            VariantId= productVariant.VariantId,
+                            VariantName = productVariant.Variant.Name,
+                            Price = productVariant.Price,
                             Quantity= item.Quantity
                         };
 

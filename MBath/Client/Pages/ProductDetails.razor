@@ -17,15 +17,27 @@ else
             </div>
             <h2 class="mb-0">@product.Name</h2>
             <p>@product.Description</p>
-            @if (product.Variants !=null && product.Variants.Count>1)
+            @if (product.ProductVariants !=null && product.ProductVariants.Count>1)
             {
                 <div class="mb-3">
                     <select class="form-select" @bind="@currentVariantId">
-                        @foreach(var variant in product.Variants)
+                        @foreach(var productVariant in product.ProductVariants)
                         {
-                            <option value="@variant.Id">
-                                @variant.Name
-                            </option>
+                            if (productVariant.Visible)
+                            {
+                                <option value="@productVariant.VariantId">
+                                    @productVariant.Variant.Name
+                                </option>
+                            }
+                            else
+                            {
+                               
+                              <option value="@productVariant.VariantId" style="background-color:dimgrey">
+                                    @productVariant.Variant.Name
+                              </option>
+                                    
+                            }
+
                         }
 
                     </select>
@@ -49,6 +61,8 @@ else
 
 @code{
     Product? product = null;
+    Variant? variants = null;
+
     private string message = "Loading product... ";
 
     private int currentVariantId = 1;
@@ -58,6 +72,11 @@ else
 
     [Parameter]
     public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -69,9 +88,9 @@ else
         else
         {
             product = result.Data;     
-            if (product.Variants.Count > 0)
+            if (product.ProductVariants.Count > 0)
             {
-                currentVariantId = product.Variants[0].Id;
+                currentVariantId = product.ProductVariants[0].VariantId;
             }
         }
 
@@ -84,16 +103,16 @@ else
         var cartItem = new CartItem()
             {
                 ProductId = Id,
-                VariantId = productVariant.Id
+                VariantId = productVariant.VariantId
 
             };
 
         await CartService.AddToCartAsync(cartItem);
     }
 
-    private Variant GetSelectedVariant()
+    private ProductVariantInfo GetSelectedVariant()
     {
-        var variant = product.Variants.FirstOrDefault(v => v.Id == currentVariantId);
+        var variant = product.ProductVariants.FirstOrDefault(v => v.VariantId== currentVariantId);
         return variant;
     }
 

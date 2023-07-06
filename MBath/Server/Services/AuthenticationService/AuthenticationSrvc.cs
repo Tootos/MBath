@@ -98,7 +98,8 @@ namespace MBath.Server.Services.AuthenticationServices
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
-                new Claim(ClaimTypes.Name,user.Email)
+                new Claim(ClaimTypes.Name,user.Email),
+                new Claim(ClaimTypes.Role,user.Role)
             };
 
             var key = new SymmetricSecurityKey(System.Text

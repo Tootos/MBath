@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MBath.Server.Controllers
@@ -21,34 +22,42 @@ namespace MBath.Server.Controllers
             return Ok(result);
         }
 
-        [HttpGet("parent/{parentId}")]
-        public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategoryParentAsync(int parentId)
+        [HttpGet("admin"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> GetAdminCategoriesAsync()
         {
-            var result = await _categoryService.GetCategoryParentAsync(parentId);
+            var result = await _categoryService.GetAdminCategoriesAsync();
             return Ok(result);
         }
 
-        [HttpGet("{categoryUrl}")]
-        public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategoriesAsync(string categoryUrl)
+        [HttpPost("admin"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> AddCategoriesAsync(Category category)
         {
-            var result= await _categoryService.GetCategoriesAsync(categoryUrl);
+            var result = await _categoryService.AddCategoriesAsync(category);
             return Ok(result);
         }
-       
+
+        [HttpDelete("admin/{categoryId}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> DeleteCategory(int categoryId)
+        {
+            var result = await _categoryService.DeleteCategoryAsync(categoryId);
+            return Ok(result);
+        }
+
+        [HttpPut("admin"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<Category>>> UpdateCategoriesAsync(Category category)
+        {
+            var result = await _categoryService.UpdateCategoriesAsync(category);
+            return Ok(result);
+        }
+
 
         [HttpGet("hasproducts/{categoryId}")]
-        public async Task<ActionResult<ServiceResponse<bool>>> DoesCategoryHaveProductsAsync(int categoryId)
+        public async Task<ActionResult<ServiceResponse<bool>>> HasProductsAsync(int categoryId)
         {
-            var result = await _categoryService.DoesCategoryHaveProductsAsync(categoryId);
+            var result = await _categoryService.HasProductsAsync(categoryId);
             return Ok(result);
         }
-
-        [HttpGet("parents")]
-        public async Task<ActionResult<ServiceResponse<List<Category>>>> GetParentCategoriesAsync()
-        {
-            var result = await _categoryService.GetParentCategoriesAsync();
-            return Ok(result);
-        }
+      
 
     }
 }

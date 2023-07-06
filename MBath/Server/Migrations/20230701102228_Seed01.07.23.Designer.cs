@@ -4,6 +4,7 @@ using MBath.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MBath.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230701102228_Seed01.07.23")]
+    partial class Seed010723
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,9 +105,6 @@ namespace MBath.Server.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("HasProducts")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ImgURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -134,7 +134,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 1,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση.jpg",
                             Name = "'Υδρευση",
                             ParentId = 0,
@@ -145,7 +144,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 2,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Αποχέτευση.jpg",
                             Name = "Αποχέτευση",
                             ParentId = 0,
@@ -156,7 +154,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 3,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Θερμοσίφωνα.jpg",
                             Name = "Θερμοσίφωνα",
                             ParentId = 0,
@@ -167,7 +164,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 4,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Μπάνιο.jpg",
                             Name = "Μπάνιο",
                             ParentId = 0,
@@ -178,7 +174,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 5,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Κουζίνα.jpg",
                             Name = "Κουζίνα",
                             ParentId = 0,
@@ -189,7 +184,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 100,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα.jpg",
                             Name = "Εξαρτήματα",
                             ParentId = 1,
@@ -200,7 +194,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 101,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Σωλήνες.jpg",
                             Name = "Σωλήνες",
                             ParentId = 1,
@@ -211,7 +204,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 102,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Διακόπτες_Κάνουλες.jpg",
                             Name = "Διακόπτες - Κάνουλες",
                             ParentId = 1,
@@ -222,7 +214,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 103,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Στηρίγματα.jpg",
                             Name = "Στηρίγματα",
                             ParentId = 1,
@@ -233,7 +224,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 104,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Στηρίγματα.jpg",
                             Name = "Συλλέκτες",
                             ParentId = 100,
@@ -244,7 +234,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 100001,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Χάλκινα Εξαρτήματα.jpg",
                             Name = "Χάλκινα Εξαρτήματα",
                             ParentId = 100,
@@ -255,7 +244,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 10002,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Ορειχάλκινα Εξαρτήματα.jpg",
                             Name = "Ορειχάλκινα Εξαρτήματα",
                             ParentId = 100,
@@ -266,7 +254,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 10003,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Σιδερένια εξαρτήματα.jpg",
                             Name = "Σιδερένια εξαρτήματα",
                             ParentId = 100,
@@ -277,7 +264,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 100004,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυαιθυλενίου.jpg",
                             Name = "Εξαρτήματα Πολυαιθυλενίου",
                             ParentId = 100,
@@ -288,7 +274,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 100005,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυπροπυλενίου.jpg",
                             Name = "Εξαρτήματα Πολυπροπυλενίου",
                             ParentId = 100,
@@ -299,7 +284,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 100006,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυστρωματικής.jpg",
                             Name = "Εξαρτήματα Πολυστρωματικής",
                             ParentId = 100,
@@ -310,7 +294,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 200,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Σωλήνες PVC",
                             ParentId = 2,
@@ -321,7 +304,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 201,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Σιφώνια αποχέτευσης",
                             ParentId = 2,
@@ -332,7 +314,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 300,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Ηλεκτρομπόιλερ",
                             ParentId = 3,
@@ -343,7 +324,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 301,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Ηλεκτρικά Θερμοσίφωνα",
                             ParentId = 3,
@@ -354,7 +334,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 500,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες.jpg",
                             Name = "Ανοξείδωτοι Νεροχύτες",
                             ParentId = 5,
@@ -365,7 +344,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 501,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Νεροχύτες Συνθετικοί.jpg",
                             Name = "Νεροχύτες Συνθετικοί",
                             ParentId = 5,
@@ -376,7 +354,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 502,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Μπαταρίες.jpg",
                             Name = "Μπαταρίες",
                             ParentId = 5,
@@ -387,7 +364,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 503,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Απορροφητήρες.jpg",
                             Name = "Απορροφητήρες",
                             ParentId = 5,
@@ -398,7 +374,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 504,
                             Deleted = false,
-                            HasProducts = true,
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Αξεσουάρ Κουζίνας ανταλλακτικά.jpg",
                             Name = "Αξεσουάρ Κουζίνας",
                             ParentId = 5,
@@ -409,7 +384,6 @@ namespace MBath.Server.Migrations
                         {
                             Id = 6,
                             Deleted = false,
-                            HasProducts = false,
                             ImgURL = "",
                             Name = "Θέρμανση",
                             ParentId = 0,
@@ -477,9 +451,6 @@ namespace MBath.Server.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -492,9 +463,6 @@ namespace MBath.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -506,65 +474,53 @@ namespace MBath.Server.Migrations
                         {
                             Id = 1,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8310.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8310",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8310"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 100x50 VENEZIA 8312.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 100x50 VENEZIA 8312",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 100x50 VENEZIA 8312"
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 116x50 VENEZIA 8316.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 116x50 VENEZIA 8316",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 116x50 VENEZIA 8316"
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8320.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8320",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8320"
                         },
                         new
                         {
                             Id = 5,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8330.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8330",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 86x50 VENEZIA 8330"
                         },
                         new
                         {
                             Id = 6,
                             CategoryId = 500,
-                            Deleted = false,
                             Description = "",
                             ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 79x50 VENEZIA 8380.jpg",
-                            Name = "Ανοξείδοτος νεροχύτης 79x50 VENEZIA 8380",
-                            Visible = true
+                            Name = "Ανοξείδοτος νεροχύτης 79x50 VENEZIA 8380"
                         });
                 });
 
-            modelBuilder.Entity("MBath.Shared.Models.ProductVariantInfo", b =>
+            modelBuilder.Entity("MBath.Shared.Models.ProductVariant", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -572,14 +528,8 @@ namespace MBath.Server.Migrations
                     b.Property<int>("VariantId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
 
                     b.HasKey("ProductId", "VariantId");
 
@@ -592,89 +542,67 @@ namespace MBath.Server.Migrations
                         {
                             ProductId = 1,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 145.00m,
-                            Visible = true
+                            Price = 145.00m
                         },
                         new
                         {
                             ProductId = 1,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 160.00m,
-                            Visible = true
+                            Price = 160.00m
                         },
                         new
                         {
                             ProductId = 2,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 145.00m,
-                            Visible = true
+                            Price = 145.00m
                         },
                         new
                         {
                             ProductId = 3,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 160.00m,
-                            Visible = true
+                            Price = 160.00m
                         },
                         new
                         {
                             ProductId = 3,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 175.00m,
-                            Visible = true
+                            Price = 175.00m
                         },
                         new
                         {
                             ProductId = 4,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 170.00m,
-                            Visible = true
+                            Price = 170.00m
                         },
                         new
                         {
                             ProductId = 4,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 185.00m,
-                            Visible = true
+                            Price = 185.00m
                         },
                         new
                         {
                             ProductId = 5,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 155.00m,
-                            Visible = true
+                            Price = 155.00m
                         },
                         new
                         {
                             ProductId = 5,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 165.00m,
-                            Visible = true
+                            Price = 165.00m
                         },
                         new
                         {
                             ProductId = 6,
                             VariantId = 1,
-                            Deleted = false,
-                            Price = 155.00m,
-                            Visible = true
+                            Price = 155.00m
                         },
                         new
                         {
                             ProductId = 6,
                             VariantId = 2,
-                            Deleted = false,
-                            Price = 165.00m,
-                            Visible = true
+                            Price = 165.00m
                         });
                 });
 
@@ -718,9 +646,6 @@ namespace MBath.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -728,9 +653,6 @@ namespace MBath.Server.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -740,18 +662,14 @@ namespace MBath.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Deleted = false,
                             Description = "",
-                            Name = "Λεία επιφάνεια",
-                            Visible = true
+                            Name = "Λεία επιφάνεια"
                         },
                         new
                         {
                             Id = 2,
-                            Deleted = false,
                             Description = "",
-                            Name = "Σαγρέ επιφάνεια",
-                            Visible = true
+                            Name = "Σαγρέ επιφάνεια"
                         });
                 });
 
@@ -811,10 +729,10 @@ namespace MBath.Server.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("MBath.Shared.Models.ProductVariantInfo", b =>
+            modelBuilder.Entity("MBath.Shared.Models.ProductVariant", b =>
                 {
                     b.HasOne("MBath.Shared.Models.Product", "Product")
-                        .WithMany("ProductVariants")
+                        .WithMany("ProductVariant")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -837,7 +755,7 @@ namespace MBath.Server.Migrations
 
             modelBuilder.Entity("MBath.Shared.Models.Product", b =>
                 {
-                    b.Navigation("ProductVariants");
+                    b.Navigation("ProductVariant");
                 });
 
             modelBuilder.Entity("MBath.Shared.Models.UserModels.User", b =>

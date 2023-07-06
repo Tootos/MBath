@@ -10,6 +10,8 @@
 
         public DbSet<Variant> Variants { get; set; }
 
+        public DbSet<ProductVariantInfo> ProductVariants { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<CartItem> CartItems { get; set; }
@@ -26,223 +28,86 @@
             modelBuilder.Entity<OrderItem>()
                 .HasKey(oi => new { oi.OrderId, oi.VariantId, oi.ProductId });
 
+            modelBuilder.Entity<ProductVariantInfo>()
+                .HasKey(pv => new { pv.ProductId, pv.VariantId });
+
             modelBuilder.Entity<Variant>().HasData(
                 new Variant
                 {
-                    Id = 1,
-                    ProductId = 1,
-                    Name = "Λεία επιφάνεια",
-                    Price = 145.00m
+                    Id = 1,                   
+                    Name = "Λεία επιφάνεια"                   
                 },
                 new Variant
                 {
-                    Id = 2,
-                    ProductId = 1,
-                    Name = "Σαγρέ επιφάνεια",
-                    Price = 160.00m
-                },
-                new Variant
-                {
-                    Id = 3,
-                    ProductId = 2,
-                    Name = "Λεία επιφάνεια",
-                    Price = 285.00m
-                },
-                new Variant
-                {
-                    Id = 4,
-                    ProductId = 3,
-                    Name = "Λεία επιφάνεια",
-                    Price = 160.00m
-                },
-                new Variant
-                {
-                    Id = 5,
-                    ProductId = 3,
-                    Name = "Σαγρέ επιφάνεια",
-                    Price = 175.00m
-                },
-                new Variant
-                {
-                    Id = 6,
-                    ProductId = 4,
-                    Name = "Λεία επιφάνεια",
-                    Price = 170.00m
-                },
-                new Variant
-                {
-                    Id = 7,
-                    ProductId = 4,
-                    Name = "Λεία επιφάνεια",
-                    Price = 185.00m
-                },
-
-                new Variant
-                {
-                    Id = 8,
-                    ProductId = 5,
-                    Name = "Λεία επιφάνεια",
-                    Price = 155.00m
-                },
-                new Variant
-                {
-                    Id = 9,
-                    ProductId = 5,
-                    Name = "Σαγρέ επιφάνεια",
-                    Price = 165.00m
-                },
-                new Variant
-                {
-                    Id = 10,
-                    ProductId = 4,
-                    Name = "Λεία επιφάνεια",
-                    Price = 170.00m
-                },
-                new Variant
-                {
-                    Id = 11,
-                    ProductId = 4,
-                    Name = "Λεία επιφάνεια",
-                    Price = 185.00m
-                },
-
-                 new Variant
-                 {
-                     Id = 12,
-                     ProductId = 5,
-                     Name = "Λεία επιφάνεια",
-                     Price = 155.00m
-                 },
-                new Variant
-                {
-                    Id = 13,
-                    ProductId = 5,
-                    Name = "Σαγρέ επιφάνεια",
-                    Price = 165.00m
-                },
-                new Variant
-                {
-                    Id = 14,
-                    ProductId = 6,
-                    Name = "Λεία επιφάνεια",
-                    Price = 155.00m
-                },
-                new Variant
-                {
-                    Id = 15,
-                    ProductId = 6,
-                    Name = "Σαγρέ επιφάνεια",
-                    Price = 165.00m
-                },
-
-                new Variant
-                {
-                    Id = 16,
-                    ProductId = 7,
-                    Name = "Λεία επιφάνεια",
-                    Price = 75.00m
-                },
-
-
-                new Variant
-                {
-                    Id = 17,
-                    ProductId = 8,
-                    Name = "Λεία επιφάνεια",
-                    Price = 100.00m
-                },
-                new Variant
-                {
-                    Id = 18,
-                    ProductId = 8,
-                    Name = "Σαγρέ επιφάνεια",
-                    Price = 109.00m
-                },
-                new Variant
-                {
-                    Id = 19,
-                    ProductId = 9,
-                    Name = "Λεία επιφάνεια",
-                    Price = 125.00m
-                },
-                new Variant
-                {
-                    Id = 20,
-                    ProductId = 9,
-                    Name = "Σαγρέ επιφάνεια",
-                    Price = 145.00m
-                },
-                new Variant
-                {
-                    Id = 21,
-                    ProductId = 10,
-                    Name = "Λεία επιφάνεια",
-                    Price = 50.00m
-                },
-                new Variant
-                {
-                    Id = 22,
-                    ProductId = 11,
-                    Name = "Λεία επιφάνεια",
-                    Price = 50.00m
-                },
-                new Variant
-                {
-                    Id = 23,
-                    ProductId = 12,
-                    Name = "Λεία επιφάνεια",
-                    Price = 60.00m
-                },
-                new Variant
-                {
-                    Id = 24,
-                    ProductId = 13,
-                    Name = "Λεία επιφάνεια",
-                    Price = 72.00m
-                },
-                new Variant
-                {
-                    Id = 25,
-                    ProductId = 14,
-                    Name = "Λεία επιφάνεια",
-                    Price = 70.00m
-                },
-                new Variant
-                {
-                    Id = 26,
-                    ProductId = 15,
-                    Name = "Λεία επιφάνεια",
-                    Price = 80.00m
-                },
-                new Variant
-                {
-                    Id = 27,
-                    ProductId = 15,
-                    Name = "Σαγρέ επιφάνεια",
-                    Price = 91.00m
-                },
-                new Variant
-                {
-                    Id = 28,
-                    ProductId = 16,
-                    Name = "Λεία επιφάνεια",
-                    Price = 90.00m
-                },
-                new Variant
-                {
-                    Id = 29,
-                    ProductId = 16,
-                    Name = "Σαγρε επιφάνεια",
-                    Price = 110.00m
-                },
-                new Variant
-                {
-                    Id = 30,
-                    ProductId = 17,
-                    Name = "Λεία επιφάνεια",
-                    Price = 113.00m
+                    Id = 2,                   
+                    Name = "Σαγρέ επιφάνεια"               
                 }
-                ) ;
+                );
+
+            modelBuilder.Entity<ProductVariantInfo>().HasData(
+                
+                new ProductVariantInfo
+                {
+                    ProductId= 1,
+                    VariantId= 1,
+                    Price= 145.00m
+                },
+                new ProductVariantInfo
+                {
+                    ProductId = 1,
+                    VariantId = 2,
+                    Price = 160.00m
+                },
+                new ProductVariantInfo
+                {
+                    ProductId = 2,
+                    VariantId = 1,
+                    Price = 145.00m
+                },
+                new ProductVariantInfo
+                {
+                    ProductId = 3,
+                    VariantId = 1,
+                    Price =160.00m
+                }, new ProductVariantInfo
+                {
+                    ProductId = 3,
+                    VariantId = 2,
+                    Price = 175.00m
+                }, new ProductVariantInfo
+                {
+                    ProductId = 4,
+                    VariantId = 1,
+                    Price =170.00m
+                }, new ProductVariantInfo
+                {
+                    ProductId = 4,
+                    VariantId = 2,
+                    Price =185.00m
+                },
+                new ProductVariantInfo
+                {
+                    ProductId = 5,
+                    VariantId = 1,
+                    Price = 155.00m
+                }, new ProductVariantInfo
+                {
+                    ProductId = 5,
+                    VariantId = 2,
+                    Price = 165.00m
+                }, new ProductVariantInfo
+                {
+                    ProductId = 6,
+                    VariantId = 1,
+                    Price = 155.00m
+                }, new ProductVariantInfo
+                {
+                    ProductId = 6,
+                    VariantId = 2,
+                    Price = 165.00m
+                }
+
+                );
                 
             modelBuilder.Entity<Product>().HasData(
 
@@ -294,95 +159,6 @@
                     CategoryId = 500,
                     ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 79x50 VENEZIA 8380.jpg"
 
-                },
-
-                new Product
-                {
-                    Id = 7,
-                    Name = "Ανοξείδοτος νεροχύτης 78,5x44,5 SLENDER 24200",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 78,5x44,5 SLENDER 24200.jpg"
-
-                },
-                new Product
-                {
-                    Id = 8,
-                    Name = "Ανοξείδοτος νεροχύτης 60x50 ARENA 22060",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 60x50 ARENA 22060.jpg"
-
-                },
-                new Product
-                {
-                    Id = 9,
-                    Name = "Ανοξείδοτος νεροχύτης 80x50 ARENA 22080",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 80x50 ARENA 22080.jpg"
-
-                },
-                new Product
-                {
-                    Id = 10,
-                    Name = "Ανοξείδοτος νεροχύτης 44,5x44,5 VALLEY 24050",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 44,5x44,5 VALLEY 24050.jpg"
-
-                },
-                new Product
-                {
-                    Id = 11,
-                    Name = "Ανοξείδοτος νεροχύτης 38x38 VALLEY 25038",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 38x38 VALLEY 25038.jpg"
-
-                },
-                new Product
-                {
-                    Id = 12,
-                    Name = "Ανοξείδοτος νεροχύτης 50x50 VALLEY 25050",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 50x50 VALLEY 25050.jpg"
-
-                },
-                new Product
-                {
-                    Id = 13,
-                    Name = "Ανοξείδοτος νεροχύτης 60x50 VALLEY 25060",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 60x50 VALLEY 25060.jpg"
-
-                },
-                new Product
-                {
-                    Id = 14,
-                    Name = "Ανοξείδοτος νεροχύτης 78x50 VALLEY 25100",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 78x50 VALLEY 25100.jpg"
-
-                },
-                new Product
-                {
-                    Id = 15,
-                    Name = "Ανοξείδοτος νεροχύτης 78x50 VALLEY 25105",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 78x50 VALLEY 25105.jpg"
-
-                },
-                new Product
-                {
-                    Id = 16,
-                    Name = "Ανοξείδοτος νεροχύτης 80x50 VALLEY 25200",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 80x50 VALLEY 25200.jpg"
-
-                },
-                new Product
-                {
-                    Id = 17,
-                    Name = "Ανοξείδοτος νεροχύτης 126x50 VALLEY 25210",
-                    CategoryId = 500,
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες\\Ανοξείδοτος νεροχύτης 126x50 VALLEY 25210.jpg"
-
                 }
                 );
                 
@@ -393,7 +169,7 @@
                 {
                     Id = 1,
                     Name = "'Υδρευση",
-                    URL = "ydreusi",
+                    Url = "ydreusi",
                     ImgURL = "\\Content\\Images\\Ύδρευση.jpg"
 
                 },
@@ -402,7 +178,7 @@
                 {
                     Id = 2,
                     Name = "Αποχέτευση",
-                    URL = "apoxeteusi",
+                    Url = "apoxeteusi",
                     ImgURL = "\\Content\\Images\\Αποχέτευση.jpg"
 
                 },
@@ -411,7 +187,7 @@
                 {
                     Id = 3,
                     Name = "Θερμοσίφωνα",
-                    URL = "thermosifona",
+                    Url = "thermosifona",
                     ImgURL = "\\Content\\Images\\Θερμοσίφωνα.jpg"
 
                 },
@@ -420,7 +196,7 @@
                 {
                     Id = 4,
                     Name = "Μπάνιο",
-                    URL = "mpanio",
+                    Url = "mpanio",
                     ImgURL = "\\Content\\Images\\Μπάνιο.jpg"
 
                 },
@@ -430,7 +206,7 @@
                 {
                     Id = 5,
                     Name = "Κουζίνα",
-                    URL= "kouzina",
+                    Url= "kouzina",
                     ImgURL = "\\Content\\Images\\Κουζίνα.jpg"
 
                 },
@@ -440,7 +216,7 @@
                 {
                     Id = 100,
                     ParentId = 1,
-                    URL = "eksartimata",
+                    Url = "eksartimata",
                     Name = "Εξαρτήματα",
                     ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα.jpg"
                 },
@@ -449,7 +225,7 @@
                 {
                     Id = 101,
                     ParentId = 1,
-                    URL = "solines",
+                    Url = "solines",
                     Name = "Σωλήνες",
                     ImgURL = "\\Content\\Images\\Ύδρευση\\Σωλήνες.jpg"
                 },
@@ -458,7 +234,7 @@
                 {
                     Id = 102,
                     ParentId = 1,
-                    URL = "diakoptes",
+                    Url = "diakoptes",
                     Name = "Διακόπτες - Κάνουλες",
                     ImgURL = "\\Content\\Images\\Ύδρευση\\Διακόπτες_Κάνουλες.jpg"
                 },
@@ -467,7 +243,7 @@
                  {
                      Id = 103,
                      ParentId = 1,
-                     URL = "stirigmata",
+                     Url = "stirigmata",
                      Name = "Στηρίγματα",
                      ImgURL = "\\Content\\Images\\Ύδρευση\\Στηρίγματα.jpg"
                 },
@@ -476,7 +252,7 @@
                 {
                     Id = 104,
                     ParentId = 100,
-                    URL = "syllektes",
+                    Url = "syllektes",
                     Name = "Συλλέκτες",
                     ImgURL = "\\Content\\Images\\Ύδρευση\\Στηρίγματα.jpg"
                 },
@@ -485,34 +261,37 @@
                 {
                     Id = 100001,
                     ParentId = 100,
-                    URL = "xalkina",
+                    Url = "xalkina",
                     Name = "Χάλκινα Εξαρτήματα",
-                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Χάλκινα Εξαρτήματα.jpg"
+                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Χάλκινα Εξαρτήματα.jpg",
+                    HasProducts = true
                 },
 
                 new Category()
                 {
                     Id = 10002,
                     ParentId = 100,
-                    URL = "orihalkina",
+                    Url = "orihalkina",
                     Name = "Ορειχάλκινα Εξαρτήματα",
-                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Ορειχάλκινα Εξαρτήματα.jpg"
+                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Ορειχάλκινα Εξαρτήματα.jpg",
+                    HasProducts = true
                 },
 
                 new Category()
                 {
                     Id = 10003,
                     ParentId = 100,
-                    URL = "siderenia",
+                    Url = "siderenia",
                     Name = "Σιδερένια εξαρτήματα",
-                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Σιδερένια εξαρτήματα.jpg"
+                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Σιδερένια εξαρτήματα.jpg",
+                    HasProducts = true
                 },
 
                 new Category()
                 {
                     Id = 100004,
                     ParentId = 100,
-                    URL = "polyethileniou",
+                    Url = "polyethileniou",
                     Name = "Εξαρτήματα Πολυαιθυλενίου",
                     ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυαιθυλενίου.jpg"
                 },
@@ -521,18 +300,20 @@
                 {
                     Id = 100005,
                     ParentId = 100,
-                    URL = "polypropileniou",
+                    Url = "polypropileniou",
                     Name = "Εξαρτήματα Πολυπροπυλενίου",
-                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυπροπυλενίου.jpg"
+                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυπροπυλενίου.jpg",
+                    HasProducts = true
                 },
 
                 new Category()
                 {
                     Id = 100006,
                     ParentId = 100,
-                    URL = "polystromatikis",
+                    Url = "polystromatikis",
                     Name = "Εξαρτήματα Πολυστρωματικής",
-                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυστρωματικής.jpg"
+                    ImgURL = "\\Content\\Images\\Ύδρευση\\Εξαρτήματα\\Εξαρτήματα Πολυστρωματικής.jpg",
+                    HasProducts = true
                 },
 
                 /* Αποχέτευση */                  
@@ -541,18 +322,18 @@
                  {
                      Id = 200,
                      ParentId = 2,
-                     URL = "solinespvc",
+                     Url = "solinespvc",
                      Name = "Σωλήνες PVC",
-                     ImgURL = "http://www.m-bath.gr/wp-content/uploads/2014/06/types-of-plumbing-pipes.jpg"
+                     ImgURL = ""
                  },
 
                 new Category()
                 {
                     Id = 201,
                     ParentId = 2,
-                    URL = "sifoniaapoxeteusis",
+                    Url = "sifoniaapoxeteusis",
                     Name = "Σιφώνια αποχέτευσης",
-                    ImgURL = "http://www.m-bath.gr/wp-content/uploads/2014/06/types-of-plumbing-pipes.jpg"
+                    ImgURL = ""
                 },
 
                 
@@ -561,18 +342,18 @@
                  {
                      Id = 300,
                      ParentId = 3,
-                     URL = "hlectroboiler",
+                     Url = "hlectroboiler",
                      Name = "Ηλεκτρομπόιλερ",
-                     ImgURL = "http://www.m-bath.gr/wp-content/uploads/2014/06/types-of-plumbing-pipes.jpg"
+                     ImgURL = ""
                  },
 
                 new Category()
                 {
                     Id = 301,
                     ParentId = 3,
-                    URL = "elektrikathermosifona",
+                    Url = "elektrikathermosifona",
                     Name = "Ηλεκτρικά Θερμοσίφωνα",
-                    ImgURL = "http://www.m-bath.gr/wp-content/uploads/2014/06/types-of-plumbing-pipes.jpg"
+                    ImgURL = ""
                 },
                 /* Μπάνιο */
 
@@ -584,16 +365,17 @@
                  {
                      Id = 500,
                      ParentId = 5,
-                     URL = "anoksidotoi",
+                     Url = "anoksidotoi",
                      Name = "Ανοξείδωτοι Νεροχύτες",
-                     ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες.jpg"
+                     ImgURL = "\\Content\\Images\\Κουζίνα\\Ανοξείδωτοι Νεροχύτες.jpg",
+                     HasProducts = true
                  },
 
                new Category()
                {
                    Id = 501,
                    ParentId = 5,
-                   URL = "synthetikoi",
+                   Url = "synthetikoi",
                    Name = "Νεροχύτες Συνθετικοί",
                    ImgURL = "\\Content\\Images\\Κουζίνα\\Νεροχύτες Συνθετικοί.jpg"
                },
@@ -601,7 +383,7 @@
                 {
                     Id = 502,
                     ParentId = 5,
-                    URL = "mpataries",
+                    Url = "mpataries",
                     Name = "Μπαταρίες",
                     ImgURL = "\\Content\\Images\\Κουζίνα\\Μπαταρίες.jpg"
                 },
@@ -610,7 +392,7 @@
                {
                    Id = 503,
                    ParentId = 5,
-                   URL = "aporrofitires",
+                   Url = "aporrofitires",
                    Name = "Απορροφητήρες",
                    ImgURL = "\\Content\\Images\\Κουζίνα\\Απορροφητήρες.jpg"
                },
@@ -618,15 +400,16 @@
                 {
                     Id = 504,
                     ParentId = 5,
-                    URL = "aksesouar",
+                    Url = "aksesouar",
                     Name = "Αξεσουάρ Κουζίνας",
-                    ImgURL = "\\Content\\Images\\Κουζίνα\\Αξεσουάρ Κουζίνας ανταλλακτικά.jpg"
+                    ImgURL = "\\Content\\Images\\Κουζίνα\\Αξεσουάρ Κουζίνας ανταλλακτικά.jpg",
+                    HasProducts = true
                 },
 
                 new Category()
                 {
                     Id = 6,
-                    URL = "thermansi",
+                    Url = "thermansi",
                     Name = "Θέρμανση",
                     ImgURL = ""
                 }

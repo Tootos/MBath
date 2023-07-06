@@ -4,6 +4,7 @@ using MBath.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MBath.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230705082847_seed05.07.23")]
+    partial class seed050723
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -814,7 +817,7 @@ namespace MBath.Server.Migrations
             modelBuilder.Entity("MBath.Shared.Models.ProductVariantInfo", b =>
                 {
                     b.HasOne("MBath.Shared.Models.Product", "Product")
-                        .WithMany("ProductVariants")
+                        .WithMany("ProductVariant")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -837,7 +840,7 @@ namespace MBath.Server.Migrations
 
             modelBuilder.Entity("MBath.Shared.Models.Product", b =>
                 {
-                    b.Navigation("ProductVariants");
+                    b.Navigation("ProductVariant");
                 });
 
             modelBuilder.Entity("MBath.Shared.Models.UserModels.User", b =>

@@ -11,6 +11,7 @@ global using MBath.Server.Services.AuthenticationServices;
 global using MBath.Server.Services.OrderService;
 global using MBath.Server.Services.PaymentService;
 global using MBath.Server.Services.AddressService;
+global using MBath.Server.Services.VariantService;
 
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -37,6 +38,7 @@ builder.Services.AddScoped<IOrderSrvc,OrderSrvc>();
 builder.Services.AddScoped<IPaymentSrvc, PaymentSrvc>();
 builder.Services.AddScoped<IAuthenticationSrvc, AuthenticationSrvc>();
 builder.Services.AddScoped<IAddressSrvc, AddressSrvc>();
+builder.Services.AddScoped<IVariantSrvc, VariantSrvc>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
