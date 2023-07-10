@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MBath.Shared.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,6 @@ namespace MBath.Shared.DataTransferObjects
         public string ProductName { get; set; } = string.Empty;
 
         public string ProductImgUrl { get; set; } = string.Empty;
+
     }
 }

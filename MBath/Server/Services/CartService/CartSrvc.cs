@@ -24,7 +24,7 @@ namespace MBath.Server.Services.CartServices
             foreach(var item in cartItems)
             {
                 var product= await _context.Products
-                    .Where(p=>p.Id==item.ProductId).FirstOrDefaultAsync();
+                    .Where(p=>p.Id==item.ProductId).Include(p=>p.Images).FirstOrDefaultAsync();
 
                 if (product != null)
                 {
@@ -39,6 +39,7 @@ namespace MBath.Server.Services.CartServices
                             ProductId = product.Id,
                             ProductName = product.Name,
                             ImgUrl = product.ImgURL,
+                            Images= product.Images,
                             VariantId= productVariant.VariantId,
                             VariantName = productVariant.Variant.Name,
                             Price = productVariant.Price,

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MBath.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230705082847_seed05.07.23")]
-    partial class seed050723
+    [Migration("20230706104412_Images")]
+    partial class Images
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -421,6 +421,28 @@ namespace MBath.Server.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MBath.Shared.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("MBath.Shared.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -776,6 +798,13 @@ namespace MBath.Server.Migrations
                     b.Navigation("Categories");
                 });
 
+            modelBuilder.Entity("MBath.Shared.Models.Image", b =>
+                {
+                    b.HasOne("MBath.Shared.Models.Product", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("MBath.Shared.Models.OrderItem", b =>
                 {
                     b.HasOne("MBath.Shared.Models.Order", "Order")
@@ -817,7 +846,7 @@ namespace MBath.Server.Migrations
             modelBuilder.Entity("MBath.Shared.Models.ProductVariantInfo", b =>
                 {
                     b.HasOne("MBath.Shared.Models.Product", "Product")
-                        .WithMany("ProductVariant")
+                        .WithMany("ProductVariants")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -840,7 +869,9 @@ namespace MBath.Server.Migrations
 
             modelBuilder.Entity("MBath.Shared.Models.Product", b =>
                 {
-                    b.Navigation("ProductVariant");
+                    b.Navigation("Images");
+
+                    b.Navigation("ProductVariants");
                 });
 
             modelBuilder.Entity("MBath.Shared.Models.UserModels.User", b =>

@@ -54,7 +54,7 @@ namespace MBath.Client.Services.CategoryService
             return result;
         }
 
-        public async Task GetAdminCategories()
+        public async Task GetAdminCategoriesAsync()
         {
 
             var result = await _http.GetFromJsonAsync<ServiceResponse<List<Category>>>("api/category/admin");
@@ -65,7 +65,9 @@ namespace MBath.Client.Services.CategoryService
             }
         }
 
-        public async Task AddCategory(Category category)
+        
+
+        public async Task AddCategoryAsync(Category category)
         {
             var result= await _http.PostAsJsonAsync("api/category/admin",category);
             if(result != null)
@@ -78,7 +80,7 @@ namespace MBath.Client.Services.CategoryService
 
         }
 
-        public async Task DeleteCategory(int categoryId)
+        public async Task DeleteCategoryAsync(int categoryId)
         {
             var result = await _http.DeleteAsync($"api/category/admin/{categoryId}");
             if (result != null)
@@ -90,7 +92,7 @@ namespace MBath.Client.Services.CategoryService
             }
         }
 
-        public async Task UpdateCategory(Category category)
+        public async Task UpdateCategoryAsync(Category category)
         {
             var result = await _http.PutAsJsonAsync("api/category/admin", category);
             if (result != null)
@@ -108,6 +110,11 @@ namespace MBath.Client.Services.CategoryService
             AdminCategories.Add(newCategory);
             CategoriesChanged.Invoke();
             return newCategory;
+        }
+
+        public List<Category> GetCategoriesWithProducts()
+        {
+            return AdminCategories.Where(c=>c.HasProducts).ToList();
         }
     }
 }

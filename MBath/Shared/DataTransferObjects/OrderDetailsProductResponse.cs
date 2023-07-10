@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MBath.Shared.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace MBath.Shared.DataTransferObjects
         public string VariantName { get; set; }=string.Empty;
 
         public string ImgUrl { get;set; }=string.Empty;
+        public List<Image> Images { get; set; }=new List<Image>();
 
         public int Quantity { get; set; }
 

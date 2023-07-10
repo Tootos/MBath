@@ -10,7 +10,19 @@ else
 {
     <div class="media">
         <div class="media-img-wrapper mr-2">
-            <img class="media-img" src="@product.ImgURL">
+            @if (!string.IsNullOrEmpty(product.ImgURL))
+            {
+                <img class="media-img" src="@product.ImgURL">
+            }
+            else
+            {
+                <MudCarousel Class="mud-width-full" ItemsSource="@product.Images" Style="height:200px;">
+                    <ItemTemplate>
+                        <MudImage Src="@context.Data"></MudImage>
+                    </ItemTemplate>
+                </MudCarousel>
+            }
+
         </div>
         <div class="media-body">
             <div class="top-row px-4">               
@@ -61,7 +73,6 @@ else
 
 @code{
     Product? product = null;
-    Variant? variants = null;
 
     private string message = "Loading product... ";
 
@@ -72,11 +83,6 @@ else
 
     [Parameter]
     public int Id { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        
-    }
 
     protected override async Task OnParametersSetAsync()
     {

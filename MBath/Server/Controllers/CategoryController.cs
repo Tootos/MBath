@@ -49,15 +49,6 @@ namespace MBath.Server.Controllers
             var result = await _categoryService.UpdateCategoriesAsync(category);
             return Ok(result);
         }
-
-
-        [HttpGet("hasproducts/{categoryId}")]
-        public async Task<ActionResult<ServiceResponse<bool>>> HasProductsAsync(int categoryId)
-        {
-            var result = await _categoryService.HasProductsAsync(categoryId);
-            return Ok(result);
-        }
       
-
     }
 }

@@ -14,6 +14,7 @@ namespace MBath.Shared.Models
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string ImgURL { get; set; } = string.Empty;
+        public List<Image> Images { get; set; }= new List<Image>();
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public List<ProductVariantInfo> ProductVariants { get; set; } = new List<ProductVariantInfo>();

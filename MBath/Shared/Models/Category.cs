@@ -15,7 +15,6 @@ namespace MBath.Shared.Models
         public string Url { get; set; } = string.Empty;
         public string ImgURL { get; set; } = string.Empty;
         public bool HasProducts { get; set; } = false;
-        public Category? Categories { get; set; }//Useless for now
         public bool Visible { get; set; } = true;
 
         public bool Deleted { get;set; } = false;

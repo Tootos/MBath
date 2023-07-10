@@ -2,14 +2,17 @@
 @inject ICategorySrvc CategoryService
 @attribute [Authorize(Roles = "Admin")]
 @implements IDisposable
+@inject IJSRuntime JSruntime
+
 
 <h3>Categories</h3>
 
 <div class="header">
     <div class="col">Id</div>
+    <div class="col">Image</div>   
     <div class="col">Name</div>
     <div class="col">Url</div>
-    <div class="col">Has Products?</div>
+    <div class="col">Has Parent/Products</div>
     <div class="col">Visible</div>
     <div class="col"></div>
 </div>
@@ -17,13 +20,15 @@
 @foreach (var category in CategoryService.AdminCategories)
 {
     @if (category.Editing)
-    {
-       
+    {      
         <EditForm Model="editingCategory" OnSubmit="UpdateCategory">
             <div class="row">
-                <div class="col col-visible">
-                    @category.Id
+                <div class="col">
+                    @editingCategory.Id
                 </div>
+                <div class="col">
+                    <img src="@editingCategory.ImgURL">
+                </div>               
                 <div class="col">
                     <InputText @bind-Value="editingCategory.Name" class="form-control"></InputText>
                 </div>
@@ -32,6 +37,15 @@
                 </div>
                 <div class="col col-visible">
                     <InputCheckbox @bind-Value="editingCategory.HasProducts" style="transform: scale(1.5,1.5);"></InputCheckbox>
+                    @if (!editingCategory.HasProducts)
+                    {
+                       <InputSelect id="category" @bind-Value="editingCategory.ParentId" class="form-control">
+                            @foreach (var category in CategoryService.AdminCategories.Where(c=>!c.HasProducts && !c.IsNew))
+                            {
+                                <option value="@category.Id">@category.Name/@category.Url</option>
+                            }
+                       </InputSelect>
+                    }
                 </div>
                 <div class="col col-visible">
                     <InputCheckbox @bind-Value="editingCategory.Visible" style="transform: scale(1.5,1.5);"></InputCheckbox>
@@ -46,14 +60,22 @@
                 </div>
 
             </div>
+            <div class="row">
+                <div class="col">
+                    <InputFile id="imageUrl" OnChange="OnFileChange"></InputFile>
+                </div>
+            </div>
 
         </EditForm>
     }
     else
     {
         <div class="row">
-            <div class="col col-visible">
-                @category.Id
+            <div class="col">
+                 @category.Id
+            </div>
+            <div class="col">
+                <img src="@category.ImgURL">
             </div>
             <div class="col">
                 @category.Name
@@ -71,7 +93,7 @@
                 <button class="btn btn-primary" @onclick="(()=>EditCategory(category))">
                     <i class="oi oi-pencil"></i>
                 </button>
-                <button class="btn btn-primary" @onclick="(()=>DeleteCategory(category.Id))">
+                <button class="btn btn-primary" @onclick="(()=>DeleteCategory(category))">
                     <i class="oi oi-trash"></i>
                 </button>
             </div>
@@ -90,7 +112,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await CategoryService.GetAdminCategories();
+        await CategoryService.GetAdminCategoriesAsync();
         CategoryService.CategoriesChanged += StateHasChanged;
     }
 
@@ -115,11 +137,11 @@
     {
         if (editingCategory.IsNew)
         {
-            await CategoryService.AddCategory(editingCategory);
+            await CategoryService.AddCategoryAsync(editingCategory);
         }
         else
         {
-            await CategoryService.UpdateCategory(editingCategory);
+            await CategoryService.UpdateCategoryAsync(editingCategory);
         }
         editingCategory = new Category();
     }
@@ -127,11 +149,30 @@
     private async Task CancelEditing()
     {
         editingCategory = new Category();
-        await CategoryService.GetAdminCategories();
+        await CategoryService.GetAdminCategoriesAsync();
     }
-    private async Task DeleteCategory(int id)
+    private async Task DeleteCategory(Category category)
     {
-        await CategoryService.DeleteCategory(id);
-        await CategoryService.GetAdminCategories();
+
+        bool confirm = await JSruntime.InvokeAsync<bool>("confirm", $"Do you want to delete Category  {category.Name} ?");
+        if (confirm)
+        {
+
+            await CategoryService.DeleteCategoryAsync(category.Id);
+            await CategoryService.GetAdminCategoriesAsync();
+        }
+    }
+
+    async Task OnFileChange(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        foreach (var image in e.GetMultipleFiles(1))
+        {
+            var resizedImage = await image.RequestImageFileAsync(format, 200, 200);
+            var buffer = new byte[resizedImage.Size];
+            await resizedImage.OpenReadStream().ReadAsync(buffer);
+            var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+            editingCategory.ImgURL = imageData;
+        }
     }
 }

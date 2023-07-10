@@ -59,7 +59,7 @@ namespace MBath.Server.Services.OrderService
             var response = new ServiceResponse<OrderDetailsResponse>();
             var order = await _context.Orders
                 .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
+                .ThenInclude(oi => oi.Product).ThenInclude(p=>p.Images)
                 .Include(o => o.OrderItems)
                 .ThenInclude(oi => oi.Variant)
                 .Where(o => o.UserId == _authentication.GetUserId() && o.Id == orderId)
@@ -84,6 +84,7 @@ namespace MBath.Server.Services.OrderService
                 ProductName = oi.Product.Name,
                 Quantity = oi.Quantity,
                 ImgUrl = oi.Product.ImgURL,
+                Images = oi.Product.Images,
                 TotalPrice = oi.TotalPrice,
                 VariantName = oi.Variant.Name
 
@@ -99,7 +100,7 @@ namespace MBath.Server.Services.OrderService
             var response= new ServiceResponse<List<OrderOverviewResponse>>();
             var orders = await _context.Orders
                 .Include(o=>o.OrderItems)
-                .ThenInclude(oi=>oi.Product)
+                .ThenInclude(oi=>oi.Product).ThenInclude(p => p.Images)
                 .Where(o=>o.UserId == _authentication.GetUserId())
                 .OrderByDescending(o=>o.OrderDate)
                 .ToListAsync();
@@ -114,7 +115,8 @@ namespace MBath.Server.Services.OrderService
                 $"{o.OrderItems.First().Product.Name} and "+
                 $"{o.OrderItems.Count-1} more..." :
                 o.OrderItems.First().Product.Name ,
-                ProductImgUrl= o.OrderItems.First().Product.ImgURL
+                ProductImgUrl= o.OrderItems.First().Product.ImgURL == ""
+                ? o.OrderItems.First().Product.Images[0].Data : o.OrderItems.First().Product.ImgURL
             }));
 
             response.Data= orderResponse;

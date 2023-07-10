@@ -7,6 +7,10 @@
     padding-bottom: 6px;
 }
 
+img {
+    max-height: 100px;
+    max-width: 100px;
+}
 .row {
     display: flex;
     padding: 6px;
@@ -14,7 +18,7 @@
 
 .col {
     flex: 1;
-
+    text-align: center;
 }
 
 .col-visible {

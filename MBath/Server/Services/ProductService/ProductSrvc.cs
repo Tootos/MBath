@@ -24,6 +24,7 @@ namespace MBath.Server.Services.ProductServices
                 product = await _context.Products
                     .Include(p => p.ProductVariants.Where(pv=> !pv.Deleted))
                     .ThenInclude(v => v.Variant)
+                    .Include(p=>p.Images)
                     .FirstOrDefaultAsync(p => p.Id == productId && !p.Deleted);
             }
             else
@@ -31,6 +32,7 @@ namespace MBath.Server.Services.ProductServices
                 product = await _context.Products
                     .Include(p => p.ProductVariants.Where(pv => pv.Visible && !pv.Deleted))
                     .ThenInclude(v => v.Variant)
+                    .Include(p => p.Images)
                     .FirstOrDefaultAsync(p => p.Id == productId && p.Visible && !p.Deleted);
             }
                  
@@ -53,6 +55,7 @@ namespace MBath.Server.Services.ProductServices
 
             var products = await _context.Products
                 .Where(p => p.Category.Url.ToLower().Contains(categoryUrl.ToLower()) && p.Visible &&!p.Deleted)
+                .Include(p=>p.Images)
                 .ToListAsync();
                
 
@@ -83,6 +86,7 @@ namespace MBath.Server.Services.ProductServices
                                 ||
                                 p.Description.ToLower().Contains(productName.ToLower())
                                 && p.Visible && !p.Deleted)
+                               .Include(p => p.Images)
                                .Skip((page-1)*(int)pageResults)
                                .Take((int)pageResults).ToListAsync();
 
@@ -133,6 +137,7 @@ namespace MBath.Server.Services.ProductServices
                 Data = await _context.Products.Where(p => !p.Deleted)
                 .Include(p=>p.ProductVariants.Where(pv=>!pv.Deleted))
                 .ThenInclude(v=>v.Variant)
+                .Include(p => p.Images)
                 .ToListAsync()
             };
 
@@ -158,7 +163,9 @@ namespace MBath.Server.Services.ProductServices
 
         public async Task<ServiceResponse<Product>> UpdateProduct(Product product)
         {
-            var dbProduct = await _context.Products.FindAsync(product.Id);
+            var dbProduct = await _context.Products
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p=>p.Id==product.Id);
 
             if(dbProduct == null)
             {
@@ -173,6 +180,11 @@ namespace MBath.Server.Services.ProductServices
             dbProduct.CategoryId= product.CategoryId;
             dbProduct.ImgURL = product.ImgURL;
             dbProduct.Visible =product.Visible;
+
+            var oldImages = dbProduct.Images;
+            _context.Images.RemoveRange(oldImages);
+
+            dbProduct.Images = product.Images;
 
             foreach(var variant in product.ProductVariants)
             {

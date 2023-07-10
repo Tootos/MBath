@@ -10,10 +10,12 @@
     
         Task GetCategoriesAsync();
 
-        Task GetAdminCategories();
-        Task AddCategory(Category category);
-        Task DeleteCategory(int categoryId);
-        Task UpdateCategory(Category category);
+        Task GetAdminCategoriesAsync();
+
+        List<Category> GetCategoriesWithProducts();
+        Task AddCategoryAsync(Category category);
+        Task DeleteCategoryAsync(int categoryId);
+        Task UpdateCategoryAsync(Category category);
 
         Category CreateNewCategory();
 

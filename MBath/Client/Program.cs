@@ -8,12 +8,15 @@ global using MBath.Shared.DataTransferObjects;
 global using MBath.Shared.Models;
 global using MBath.Shared.Models.UserModels;
 
+
 global using Microsoft.AspNetCore.Components.Authorization;
 global using Blazored.LocalStorage;
 using MBath.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MBath.Client.Services.AddressService;
+using MudBlazor;
+using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -30,6 +33,7 @@ builder.Services.AddScoped<IVariantSrvc, VariantSrvc>();
 
 builder.Services.AddScoped<IAuthenticationSrvc, AuthenticationSrvc>();
 
+builder.Services.AddMudServices();
 
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();

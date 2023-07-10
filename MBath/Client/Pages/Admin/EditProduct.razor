@@ -31,6 +31,33 @@ else
             <label for="imageUrl">Image Url</label>
             <InputText id="imageUrl" @bind-Value="product.ImgURL" class="form-control"></InputText>
         </div>
+        <div class="mb-0" style="display:flex; flex-wrap: wrap; flex-direction:row; justify-content:center;">
+            @if (!string.IsNullOrEmpty(product.ImgURL))
+            {
+                <img src="@product.ImgURL" />
+            }
+            else
+            {
+                foreach(var image in product.Images)
+                {
+                   <MudCard Class="ma-1">
+                       <MudCardContent>
+                           <MudImage Src="@image.Data"></MudImage>
+                       </MudCardContent>
+                       <MudCardActions Style="justify-content:center;">
+                           <MudButton Variant="MudBlazor.Variant.Filled" 
+                           Color="Color.Error" 
+                           OnClick="(()=>RemoveImage(Id))">Remove</MudButton>
+                       </MudCardActions>
+
+                   </MudCard>
+                }
+            }
+        </div>
+        <div class="mb-0">
+            <label for="images">Image(s)</label>
+            <InputFile id="images" OnChange="OnFileChange" multiple class="form-control"></InputFile>
+        </div>
         <div class="mb-0">
             <label for="description">Description</label>
             <InputText id="description" @bind-Value="product.Description" class="form-control"></InputText>
@@ -45,7 +72,6 @@ else
 
         @foreach(var productVariant in product.ProductVariants)
         {
-
             <div class="row">
                 <div class="col"> 
                     @if (productVariant.IsNew)
@@ -62,8 +88,7 @@ else
                                 <option value="@variant.Id.ToString()">@variant.Name</option>
                             }
                         </InputSelect>
-                    }
-                    
+                    }                   
             </div>
             
             <div class="col">
@@ -88,7 +113,7 @@ else
         <div class="mb-0">
             <lavel for="category">Category</lavel>
             <InputSelect id="category" @bind-Value="product.CategoryId" class="form-control">
-                @foreach (var category in CategoryService.AdminCategories)
+                @foreach (var category in CategoryService.GetCategoriesWithProducts())
                 {
                     <option value="@category.Id">@category.Name</option>
                 }
@@ -127,11 +152,11 @@ else
 
     string btnText = string.Empty;
 
-    string variantTxtbox;
+    string variantTxtbox= string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        await CategoryService.GetAdminCategories();
+        await CategoryService.GetAdminCategoriesAsync();
         await VariantService.GetVariantsAsync();
     }
 
@@ -196,7 +221,7 @@ else
 
     }
 
-    
+
 
     async void DeleteProduct()
     {
@@ -222,6 +247,28 @@ else
         else
         {
             variant.Deleted = true;
+        }
+    }
+
+    async Task OnFileChange(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        foreach (var image in e.GetMultipleFiles(int.MaxValue))
+        {
+            var resizedImage = await image.RequestImageFileAsync(format, 200, 200);
+            var buffer = new byte[resizedImage.Size];
+            await resizedImage.OpenReadStream().ReadAsync(buffer);
+            var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+            product.Images.Add(new Image { Data = imageData });
+        }
+    }
+
+    void RemoveImage(int imageId)
+    {
+        var image = product.Images.FirstOrDefault(i => i.Id == imageId);
+        if (image!= null)
+        {
+            product.Images.Remove(image);
         }
     }
 }

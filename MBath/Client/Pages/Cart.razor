@@ -17,7 +17,15 @@ else
         {
             <div class="container">
                 <div class="image-wrapper">
-                    <img src="@product.ImgUrl" class="image"/>
+                    @if (!string.IsNullOrEmpty(product.ImgUrl))
+                    {
+                        <img src="@product.ImgUrl" class="image" />
+                    }
+                    else
+                    {
+                        <img src="@product.Images[0].Data" class="image" alt="@product.ProductName"/>
+                    }
+                    
                 </div>
                 <div class="name">
                     <h5> <a href="/product/@product.ProductId">@product.ProductName</a></h5>   
