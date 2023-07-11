@@ -74,7 +74,7 @@ else
         {
             <div class="row">
                 <div class="col"> 
-                    @if (productVariant.IsNew)
+                    @if (productVariant.Editing)
                     {
                         <div class="mb-0">
                             <InputText id="name" @bind-Value="variantTxtbox" class="form-control"></InputText>
@@ -82,7 +82,12 @@ else
                     }
                     else
                     {
-                        <InputSelect disabled="@productVariant.Deleted" @bind-Value="productVariant.VariantId" class="form-control">
+                        <InputSelect disabled="@productVariant.Deleted" @bind-Value="productVariant.VariantId" class="form-control" >
+                            @if (productVariant.IsNew)
+                            {
+                                <option value="@productVariant.VariantId.ToString()"></option>
+                            }
+                           
                             @foreach (var variant in VariantService.AdminVariants)
                             {
                                 <option value="@variant.Id.ToString()">@variant.Name</option>
@@ -148,7 +153,7 @@ else
 
     Product product = new Product();
     bool loading = true;
-    string message = string.Empty;
+    string message = "New Variant";
 
     string btnText = string.Empty;
 
@@ -190,9 +195,13 @@ else
         {
             foreach (var variant in product.ProductVariants)
             {
-                if (variant.IsNew)
+                if (variant.IsNew && !variant.Editing)
                 {
-                    variant.VariantId = (await VariantService.CreateVariantAsync(variantTxtbox)).Id;
+                    variant.VariantId = (await VariantService.CreateVariantAsync(variant.Variant.Name)).Id;
+                }
+                else if (variant.IsNew && !string.IsNullOrEmpty(variantTxtbox))
+                {
+                    variant.VariantId = (await VariantService.CreateVariantAsync(variantTxtbox)).Id;                   
                 }
             }
             var result = await ProductService.AddProductAsync(product);
@@ -204,10 +213,15 @@ else
 
             foreach(var variant in product.ProductVariants)
             {
-                if (variant.IsNew)
+                if (variant.IsNew && !variant.Editing)
+                {
+                    variant.VariantId = (await VariantService.CreateVariantAsync(variant.Variant.Name)).Id;
+                }
+                else if (variant.IsNew && !string.IsNullOrEmpty(variantTxtbox))
                 {
                     variant.VariantId = (await VariantService.CreateVariantAsync(variantTxtbox)).Id;
                 }
+
             }
             product = await ProductService.UpdateProductAsync(product);
             NavigationManager.NavigateTo($"admin/product/{product.Id}",true);
@@ -216,9 +230,30 @@ else
 
     void AddVariant()
     {
-        product.ProductVariants
-        .Add(new ProductVariantInfo { IsNew = true, ProductId = product.Id });
 
+        foreach(var variant in product.ProductVariants)
+        {
+            if (variant.IsNew)
+            {
+                variant.Variant.Name = variantTxtbox;
+                variant.Editing = false;
+            }
+        }
+
+        variantTxtbox = string.Empty;
+        product.ProductVariants
+        .Add(new ProductVariantInfo
+        {
+            IsNew = true,
+            ProductId = product.Id,
+            Editing = true
+            ,
+            Variant = new MBath.Shared.Models.Variant
+            {
+                Name = "New Variant"
+            }
+        });
+        
     }
 
 

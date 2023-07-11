@@ -193,7 +193,6 @@ namespace MBath.Server.Services.ProductServices
                     pv.VariantId == variant.VariantId);
                 if (dbVariant == null)
                 {
-                    variant.Variant = null;
                     _context.ProductVariants.Add(variant);
                 }
                 else

@@ -40,11 +40,11 @@ namespace MBath.Client.Services.ProductService
     
         }
 
-        public async Task GetProductsAsync(string categoryUrl , int page)
+        public async Task GetProductsAsync(string categoryUrl, int page)
         {
             LastSearchedText = categoryUrl;
 
-            var result =  
+            var result =
                 await _http.GetFromJsonAsync<ServiceResponse<ProductListResponse>>($"api/Product/products/{categoryUrl}/{page}");
 
             if (result != null && result.Data != null)
@@ -53,8 +53,12 @@ namespace MBath.Client.Services.ProductService
                 CurrentPage = result.Data.CurrentPage;
                 Pages = result.Data.Pages;
             }
+            else
+            {
+                Message = "Products not found.";
 
-            ProductsChanged.Invoke();
+                ProductsChanged.Invoke();
+            }
         }
 
         public async Task SearchProductsAsync(string searchedText, int page)

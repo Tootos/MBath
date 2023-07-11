@@ -7,6 +7,5 @@
         Task<ServiceResponse<List<Variant>>> UpdateVariant(Variant variant);
 
 
-
     }
 }

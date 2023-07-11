@@ -7,12 +7,14 @@
 
 <h3>Categories</h3>
 
+
 <div class="header">
     <div class="col">Id</div>
     <div class="col">Image</div>   
     <div class="col">Name</div>
     <div class="col">Url</div>
-    <div class="col">Has Parent/Products</div>
+    <div class="col">Parent</div>
+    <div class="col">Has Products</div>
     <div class="col">Visible</div>
     <div class="col"></div>
 </div>
@@ -30,22 +32,24 @@
                     <img src="@editingCategory.ImgURL">
                 </div>               
                 <div class="col">
-                    <InputText @bind-Value="editingCategory.Name" class="form-control"></InputText>
+                    <InputText @bind-Value="editingCategory.Name" class="form-control" placeholder="Name"></InputText>
                 </div>
                 <div class="col">
-                    <InputText @bind-Value="editingCategory.Url" class="form-control"></InputText>
+                    <InputText @bind-Value="editingCategory.Url" class="form-control" placeholder="Url"></InputText>
+                </div>
+
+                <div class="col">
+                    <InputSelect id="category" @bind-Value="editingCategory.ParentId" class="form-control">
+                        @foreach (var category in CategoryService.AdminCategories.Where(c => !c.HasProducts && !c.IsNew))
+                        {
+                            <option value="@category.Id">@category.Name/@category.Url</option>
+                        }
+                    </InputSelect>
                 </div>
                 <div class="col col-visible">
                     <InputCheckbox @bind-Value="editingCategory.HasProducts" style="transform: scale(1.5,1.5);"></InputCheckbox>
-                    @if (!editingCategory.HasProducts)
-                    {
-                       <InputSelect id="category" @bind-Value="editingCategory.ParentId" class="form-control">
-                            @foreach (var category in CategoryService.AdminCategories.Where(c=>!c.HasProducts && !c.IsNew))
-                            {
-                                <option value="@category.Id">@category.Name/@category.Url</option>
-                            }
-                       </InputSelect>
-                    }
+                       
+                    
                 </div>
                 <div class="col col-visible">
                     <InputCheckbox @bind-Value="editingCategory.Visible" style="transform: scale(1.5,1.5);"></InputCheckbox>
@@ -100,9 +104,9 @@
 
         </div>
     }
-
+    
 }
-<button class="btn btn-primary" @onclick="CreateNewCategory">
+<button class="btn btn-primary float-end" @onclick="CreateNewCategory">
     <i class="oi oi-plus">Add Category</i>
 </button>
 
