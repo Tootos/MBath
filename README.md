@@ -7,4 +7,4 @@ the purpose of the site is to simple practice these technologies in my sandbox.
 
 MBath sells bathroom products, plumbing supplies and tools. 
  
-Note: Many products and categories are placeholder,  this is not a finished project
+Note: Many products and categories are placeholder
